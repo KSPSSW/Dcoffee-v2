@@ -5,7 +5,7 @@
 package com.mycompany.project_alpabet_crud.dao;
 
 import com.mycompany.project_alpabet_crud.helper.DatabaseHelper;
-import com.mycompany.project_alpabet_crud.model.Material;
+import com.mycompany.project_alpabet_crud.model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,12 +18,12 @@ import java.util.List;
  *
  * @author werapan
  */
-public class MaterialDao implements Dao<Material> {
+public class ProductDao implements Dao<Product> {
 
     @Override
-    public Material get(int id) {
-        Material material = null;
-        String sql = "SELECT * FROM material WHERE material_id=?";
+    public Product get(int id) {
+        Product product = null;
+        String sql = "SELECT * FROM product WHERE product_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -31,45 +31,26 @@ public class MaterialDao implements Dao<Material> {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                material = Material.fromRS(rs);
+                product = Product.fromRS(rs);
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return material;
+        return product;
     }
-
-    public Material getByName(String name) {
-        Material material = null;
-        String sql = "SELECT * FROM material WHERE material_name=?";
-        Connection conn = DatabaseHelper.getConnect();
-        try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                material = Material.fromRS(rs);
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return material;
-    }
-
-    public List<Material> getAll() {
-        ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material";
+    
+    public List<Product> getAll() {
+        ArrayList<Product> list = new ArrayList();
+        String sql = "SELECT * FROM product";
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Material material = Material.fromRS(rs);
-                list.add(material);
+                Product product = Product.fromRS(rs);
+                list.add(product);
 
             }
 
@@ -80,17 +61,17 @@ public class MaterialDao implements Dao<Material> {
     }
     
     @Override
-    public List<Material> getAll(String where, String order) {
-        ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material where " + where + " ORDER BY" + order;
+    public List<Product> getAll(String where, String order) {
+        ArrayList<Product> list = new ArrayList();
+        String sql = "SELECT * FROM product where " + where + " ORDER BY" + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Material material = Material.fromRS(rs);
-                list.add(material);
+                Product product = Product.fromRS(rs);
+                list.add(product);
 
             }
 
@@ -101,17 +82,17 @@ public class MaterialDao implements Dao<Material> {
     }
     
 
-    public List<Material> getAll(String order) {
-        ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material  ORDER BY" + order;
+    public List<Product> getAll(String order) {
+        ArrayList<Product> list = new ArrayList();
+        String sql = "SELECT * FROM product  ORDER BY" + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Material material = Material.fromRS(rs);
-                list.add(material);
+                Product product = Product.fromRS(rs);
+                list.add(product);
 
             }
 
@@ -122,17 +103,20 @@ public class MaterialDao implements Dao<Material> {
     }
 
     @Override
-    public Material save(Material obj) {
+    public Product save(Product obj) {
 
-        String sql = "INSERT INTO material (material_name, material_qty, material_price)"
-                + "VALUES(?, ?, ?)";
+        String sql = "INSERT INTO product (product_name, product_price, product_size, product_sweet_level, product_type, category_id)"
+                + "VALUES(?, ?, ?, ?, ?, ?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, obj.getName());
-            stmt.setInt(2, obj.getQty());
-            stmt.setInt(3,obj.getPrice());
-            
+            stmt.setFloat(2, obj.getPrice());
+            stmt.setString(3, obj.getSize());
+            stmt.setString(4, obj.getSweetLevel());
+            stmt.setString(5, obj.getType());
+            stmt.setInt(6, obj.getCategory());
+//            System.out.println(stmt);
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
             obj.setId(id);
@@ -144,16 +128,20 @@ public class MaterialDao implements Dao<Material> {
     }
 
     @Override
-    public Material update(Material obj) {
-        String sql = "UPDATE material"
-                + " SET material_name = ?, material_qty = ?, material_price = ?"
-                + " WHERE material_id = ?";
+    public Product update(Product obj) {
+        String sql = "UPDATE product"
+                + " SET product_name = ?, product_price = ?, product_size = ?, product_sweet_level = ?, product_type = ?, category_id = ?"
+                + " WHERE product_id = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, obj.getName());
-            stmt.setInt(2, obj.getQty());
-            stmt.setInt(3,obj.getPrice());
+            stmt.setFloat(2, obj.getPrice());
+            stmt.setString(3, obj.getSize());
+            stmt.setString(4, obj.getSweetLevel());
+            stmt.setString(5, obj.getType());
+            stmt.setInt(6, obj.getCategory());
+            stmt.setInt(7, obj.getId());
 //            System.out.println(stmt);
             int ret = stmt.executeUpdate();
             System.out.println(ret);
@@ -165,8 +153,8 @@ public class MaterialDao implements Dao<Material> {
     }
 
     @Override
-    public int delete(Material obj) {
-        String sql = "DELETE FROM material WHERE material_id=?";
+    public int delete(Product obj) {
+        String sql = "DELETE FROM product WHERE product_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);

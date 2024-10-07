@@ -5,7 +5,7 @@
 package com.mycompany.project_alpabet_crud.dao;
 
 import com.mycompany.project_alpabet_crud.helper.DatabaseHelper;
-import com.mycompany.project_alpabet_crud.model.Material;
+import com.mycompany.project_alpabet_crud.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,14 +16,14 @@ import java.util.List;
 
 /**
  *
- * @author werapan
+ * @author ACER
  */
-public class MaterialDao implements Dao<Material> {
+public class UserDao implements Dao<User> {
 
     @Override
-    public Material get(int id) {
-        Material material = null;
-        String sql = "SELECT * FROM material WHERE material_id=?";
+    public User get(int id) {
+        User user = null;
+        String sql = "SELECT * FROM user WHERE user_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -31,18 +31,18 @@ public class MaterialDao implements Dao<Material> {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                material = Material.fromRS(rs);
+                user = User.fromRS(rs);
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return material;
+        return user;
     }
 
-    public Material getByName(String name) {
-        Material material = null;
-        String sql = "SELECT * FROM material WHERE material_name=?";
+    public User getByLogin(String name) {
+        User user = null;
+        String sql = "SELECT * FROM user WHERE user_login=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -50,26 +50,26 @@ public class MaterialDao implements Dao<Material> {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                material = Material.fromRS(rs);
+                user = User.fromRS(rs);
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return material;
+        return user;
     }
 
-    public List<Material> getAll() {
-        ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material";
+    public List<User> getAll() {
+        ArrayList<User> list = new ArrayList();
+        String sql = "SELECT * FROM user";
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Material material = Material.fromRS(rs);
-                list.add(material);
+                User user = User.fromRS(rs);
+                list.add(user);
 
             }
 
@@ -80,17 +80,17 @@ public class MaterialDao implements Dao<Material> {
     }
     
     @Override
-    public List<Material> getAll(String where, String order) {
-        ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material where " + where + " ORDER BY" + order;
+    public List<User> getAll(String where, String order) {
+        ArrayList<User> list = new ArrayList();
+        String sql = "SELECT * FROM user where " + where + " ORDER BY" + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Material material = Material.fromRS(rs);
-                list.add(material);
+                User user = User.fromRS(rs);
+                list.add(user);
 
             }
 
@@ -101,17 +101,17 @@ public class MaterialDao implements Dao<Material> {
     }
     
 
-    public List<Material> getAll(String order) {
-        ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material  ORDER BY" + order;
+    public List<User> getAll(String order) {
+        ArrayList<User> list = new ArrayList();
+        String sql = "SELECT * FROM user  ORDER BY" + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                Material material = Material.fromRS(rs);
-                list.add(material);
+                User user = User.fromRS(rs);
+                list.add(user);
 
             }
 
@@ -122,17 +122,19 @@ public class MaterialDao implements Dao<Material> {
     }
 
     @Override
-    public Material save(Material obj) {
+    public User save(User obj) {
 
-        String sql = "INSERT INTO material (material_name, material_qty, material_price)"
-                + "VALUES(?, ?, ?)";
+        String sql = "INSERT INTO user (user_login, user_name, user_gender, user_password, user_role)"
+                + "VALUES(?, ?, ?, ?, ?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getName());
-            stmt.setInt(2, obj.getQty());
-            stmt.setInt(3,obj.getPrice());
-            
+            stmt.setString(1, obj.getLogin());
+            stmt.setString(2, obj.getName());
+            stmt.setString(3, obj.getGender());
+            stmt.setString(4, obj.getPassword());
+            stmt.setInt(5, obj.getRole());
+//            System.out.println(stmt);
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
             obj.setId(id);
@@ -144,16 +146,19 @@ public class MaterialDao implements Dao<Material> {
     }
 
     @Override
-    public Material update(Material obj) {
-        String sql = "UPDATE material"
-                + " SET material_name = ?, material_qty = ?, material_price = ?"
-                + " WHERE material_id = ?";
+    public User update(User obj) {
+        String sql = "UPDATE user"
+                + " SET user_login = ?, user_name = ?, user_gender = ?, user_password = ?, user_role = ?"
+                + " WHERE user_id = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getName());
-            stmt.setInt(2, obj.getQty());
-            stmt.setInt(3,obj.getPrice());
+            stmt.setString(1, obj.getLogin());
+            stmt.setString(2, obj.getName());
+            stmt.setString(3, obj.getGender());
+            stmt.setString(4, obj.getPassword());
+            stmt.setInt(5, obj.getRole());
+            stmt.setInt(6, obj.getId());
 //            System.out.println(stmt);
             int ret = stmt.executeUpdate();
             System.out.println(ret);
@@ -165,8 +170,8 @@ public class MaterialDao implements Dao<Material> {
     }
 
     @Override
-    public int delete(Material obj) {
-        String sql = "DELETE FROM material WHERE material_id=?";
+    public int delete(User obj) {
+        String sql = "DELETE FROM user WHERE user_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
