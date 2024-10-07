@@ -8,18 +8,41 @@ package com.mycompany.project_alpabet_crud.service;
 import com.mycompany.project_alpabet_crud.dao.ProductDao;
 import com.mycompany.project_alpabet_crud.model.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author werapan
  */
 public class ProductService {
-    private ProductDao prodcutDao = new ProductDao();
-    
-    public ArrayList<Product> getProductsOrderByName(){
-        return (ArrayList<Product>) prodcutDao.getAll("product_name ASC");
+    public List<Product> getByName(String name){
+        ProductDao prodcutDao = new ProductDao();
+        return prodcutDao.getAll(" product_name asc");
 
+    }
+        public Product getById(int id){
+    ProductDao productDao = new ProductDao();
+    return productDao.get(id);
+    }
+    
+    public List<Product> getProducts(){
+        ProductDao productDao = new ProductDao();
+        return productDao.getAll(" product_id asc");
+    }
+
+    public Product addNew(Product editedProduct) {
+        ProductDao productDao = new ProductDao();
+        return productDao.save(editedProduct);
+    }
+
+    public Product update(Product editedProduct) {
+        ProductDao productDao = new ProductDao();
+        return productDao.update(editedProduct);
+    }
+
+    public int delete(Product editedProduct) {
+        ProductDao productDao = new ProductDao();
+        return productDao.delete(editedProduct);
     }
     
 }
