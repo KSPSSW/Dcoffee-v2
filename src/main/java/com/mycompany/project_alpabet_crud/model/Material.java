@@ -22,11 +22,11 @@ public class Material {
     private int id;
     private String name;
     private int quantity;
-    private Date inDate;
-    private Date expireDate;
+    private String inDate;
+    private String expireDate;
     private int stockId;
 
-    public Material(int id, String name, int quantity, Date inDate, Date expireDate, int stockId) {
+    public Material(int id, String name, int quantity, String inDate, String expireDate, int stockId) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -35,7 +35,7 @@ public class Material {
         this.stockId = stockId;
     }
 
-    public Material(String name, int quantity, Date inDate, Date expireDate, int stockId) {
+    public Material(String name, int quantity, String inDate, String expireDate, int stockId) {
         this.id = -1;
         this.name = name;
         this.quantity = quantity;
@@ -77,29 +77,31 @@ public class Material {
         this.quantity = quantity;
     }
 
-    public Date getIn_date() {
+    public String getInDate() {
         return inDate;
     }
 
-    public void setIn_date(Date inDate) {
+    public void setInDate(String inDate) {
         this.inDate = inDate;
     }
 
-    public Date getExpire_date() {
+    public String getExpireDate() {
         return expireDate;
     }
 
-    public void setExpire_date(Date expireDate) {
+    public void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
     }
 
-    public int getStock_id() {
+    public int getStockId() {
         return stockId;
     }
 
-    public void setStock_id(int stockId) {
+    public void setStockId(int stockId) {
         this.stockId = stockId;
     }
+
+    
 
     @Override
     public String toString() {
@@ -112,8 +114,8 @@ public class Material {
             material.setId(rs.getInt("mat_id"));
             material.setName(rs.getString("mat_name"));
             material.setQuantity(rs.getInt("mat_quantity"));
-            material.setIn_date(rs.getDate("mat_indate"));
-            material.setExpire_date(rs.getDate("mat_expiredate"));
+            material.setInDate(rs.getString("mat_inDate"));
+            material.setExpireDate(rs.getString("mat_expireDate"));
             material.setId(rs.getInt("stockId"));
         } catch(SQLException ex){
             Logger.getLogger(Material.class.getName()).log(Level.SEVERE, null, ex);
