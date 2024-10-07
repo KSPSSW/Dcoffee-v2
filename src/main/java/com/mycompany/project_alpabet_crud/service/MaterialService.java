@@ -4,6 +4,9 @@
  */
 package com.mycompany.project_alpabet_crud.service;
 
+import com.mycompany.project_alpabet_crud.dao.MaterialDao;
+import com.mycompany.project_alpabet_crud.model.Material;
+
 /**
  *
  * @author kissa
