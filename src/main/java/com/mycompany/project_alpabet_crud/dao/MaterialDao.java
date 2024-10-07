@@ -7,7 +7,6 @@ package com.mycompany.project_alpabet_crud.dao;
 import com.mycompany.project_alpabet_crud.helper.DatabaseHelper;
 import com.mycompany.project_alpabet_crud.model.Material;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
