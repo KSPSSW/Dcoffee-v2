@@ -125,15 +125,14 @@ public class MaterialDao implements Dao<Material> {
     @Override
     public Material save(Material obj) {
 
-        String sql = "INSERT INTO material (material_name, material_qty, material_indate, material_expiredate)"
-                + "VALUES(?, ?, ?, ?,)";
+        String sql = "INSERT INTO material (material_name, material_qty, material_price)"
+                + "VALUES(?, ?, ?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, obj.getName());
-            stmt.setInt(2, obj.getQuantity());
-            stmt.setString(3,obj.getInDate());
-            stmt.setString(4,obj.getExpireDate());
+            stmt.setInt(2, obj.getQty());
+            stmt.setInt(3,obj.getPrice());
             
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
@@ -148,15 +147,14 @@ public class MaterialDao implements Dao<Material> {
     @Override
     public Material update(Material obj) {
         String sql = "UPDATE material"
-                + " SET material_name = ?, material_qty = ?, material_indate = ?, material_expiredate = ?"
+                + " SET material_name = ?, material_qty = ?, material_price = ?"
                 + " WHERE material_id = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, obj.getName());
-            stmt.setInt(2, obj.getQuantity());
-            stmt.setString(3,obj.getInDate());
-            stmt.setString(4,obj.getExpireDate());
+            stmt.setInt(2, obj.getQty());
+            stmt.setInt(3,obj.getPrice());
 //            System.out.println(stmt);
             int ret = stmt.executeUpdate();
             System.out.println(ret);

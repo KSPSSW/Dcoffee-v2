@@ -21,36 +21,28 @@ public class Material {
     }
     private int id;
     private String name;
-    private int quantity;
-    private String inDate;
-    private String expireDate;
-    private int stockId;
+    private int qty;
+    private int price;
 
-    public Material(int id, String name, int quantity, String inDate, String expireDate, int stockId) {
+    public Material(int id, String name, int qty, int price) {
         this.id = id;
         this.name = name;
-        this.quantity = quantity;
-        this.inDate = inDate;
-        this.expireDate = expireDate;
-        this.stockId = stockId;
+        this.qty = qty;
+        this.price = price;
     }
 
-    public Material(String name, int quantity, String inDate, String expireDate, int stockId) {
+    public Material(String name, int qty, int price) {
         this.id = -1;
         this.name = name;
-        this.quantity = quantity;
-        this.inDate = inDate;
-        this.expireDate = expireDate;
-        this.stockId = stockId;
+        this.qty = qty;
+        this.price = price;
     }
 
     public Material() {
         this.id = -1;
         this.name = "";
-        this.quantity = 0;
-        this.inDate = null;
-        this.expireDate = null;
-        this.stockId = -1;
+       this.qty = 0;
+        this.price = 0;
     }
 
     public int getId() {
@@ -69,54 +61,35 @@ public class Material {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
-    public String getInDate() {
-        return inDate;
+    public int getPrice() {
+        return price;
     }
 
-    public void setInDate(String inDate) {
-        this.inDate = inDate;
+    public void setPrice(int price) {
+        this.price = price;
     }
-
-    public String getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(String expireDate) {
-        this.expireDate = expireDate;
-    }
-
-    public int getStockId() {
-        return stockId;
-    }
-
-    public void setStockId(int stockId) {
-        this.stockId = stockId;
-    }
-
-    
 
     @Override
     public String toString() {
-        return "Matererial{" + "id=" + id + ", name=" + name + ", quantity=" + quantity + ", inDate=" + inDate + ", expireDate=" + expireDate + ", stockId=" + stockId + '}';
+        return "Material{" + "id=" + id + ", name=" + name + ", qty=" + qty + ", price=" + price + '}';
     }
+
     
     public static Material fromRs(ResultSet rs){
         Material material = new Material();
         try {
-            material.setId(rs.getInt("mat_id"));
-            material.setName(rs.getString("mat_name"));
-            material.setQuantity(rs.getInt("mat_quantity"));
-            material.setInDate(rs.getString("mat_inDate"));
-            material.setExpireDate(rs.getString("mat_expireDate"));
-            material.setId(rs.getInt("stockId"));
+            material.setId(rs.getInt("material_id"));
+            material.setName(rs.getString("material_name"));
+            material.setQty(rs.getInt("material_qty"));
+            material.setPrice(rs.getInt("material_price"));
         } catch(SQLException ex){
             Logger.getLogger(Material.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -124,4 +97,4 @@ public class Material {
         return material;
     }
 }
-     
+
