@@ -4,9 +4,9 @@
  */
 package com.mycompany.project_alpabet_crud.service;
 
-
 import com.mycompany.project_alpabet_crud.dao.ProductDao;
 import com.mycompany.project_alpabet_crud.model.Product;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -15,17 +15,25 @@ import java.util.List;
  * @author werapan
  */
 public class ProductService {
-    public List<Product> getByName(String name){
+
+    public ArrayList<Product> getProductsOrderByName() {
+        ProductDao prodcutDao = new ProductDao();
+        return (ArrayList<Product>) prodcutDao.getAll("product_name ASC");
+
+    }
+
+    public List<Product> getByName(String name) {
         ProductDao prodcutDao = new ProductDao();
         return prodcutDao.getAll(" product_name asc");
 
     }
-        public Product getById(int id){
-    ProductDao productDao = new ProductDao();
-    return productDao.get(id);
+
+    public Product getById(int id) {
+        ProductDao productDao = new ProductDao();
+        return productDao.get(id);
     }
-    
-    public List<Product> getProducts(){
+
+    public List<Product> getProducts() {
         ProductDao productDao = new ProductDao();
         return productDao.getAll(" product_id asc");
     }
@@ -44,5 +52,5 @@ public class ProductService {
         ProductDao productDao = new ProductDao();
         return productDao.delete(editedProduct);
     }
-    
+
 }

@@ -27,6 +27,12 @@ public class Category {
         return id;
     }
 
+    public Category() {
+         this.id = -1;
+         this.name = null;
+    }
+    
+
     public void setId(int id) {
         this.id = id;
     }
