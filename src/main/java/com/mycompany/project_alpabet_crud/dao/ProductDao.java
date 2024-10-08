@@ -115,7 +115,7 @@ public class ProductDao implements Dao<Product> {
             stmt.setString(3, obj.getSize());
             stmt.setString(4, obj.getSweetLevel());
             stmt.setString(5, obj.getType());
-            stmt.setInt(6, obj.getCategory());
+            stmt.setInt(6, obj.getCategoryId());
 //            System.out.println(stmt);
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
@@ -140,7 +140,7 @@ public class ProductDao implements Dao<Product> {
             stmt.setString(3, obj.getSize());
             stmt.setString(4, obj.getSweetLevel());
             stmt.setString(5, obj.getType());
-            stmt.setInt(6, obj.getCategory());
+            stmt.setInt(6, obj.getCategoryId());
             stmt.setInt(7, obj.getId());
 //            System.out.println(stmt);
             int ret = stmt.executeUpdate();

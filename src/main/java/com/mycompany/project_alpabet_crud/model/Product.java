@@ -4,6 +4,7 @@
  */
 package com.mycompany.project_alpabet_crud.model;
 
+import com.mycompany.project_alpabet_crud.dao.CategoryDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,26 +21,27 @@ public class Product {
     private String size;
     private String sweetLevel;
     private String type;
-    private int category;
+    private int categoryId;
+    private Category category;
 
-    public Product(int id, String name, float price, String size, String sweetLevel, String type, int category) {
+    public Product(int id, String name, float price, String size, String sweetLevel, String type, int categoryId) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.size = size;
         this.sweetLevel = sweetLevel;
         this.type = type;
-        this.category = category;
+        this.categoryId = categoryId;
     }
     
-    public Product(String name, float price, String size, String sweetLevel, String type, int category) {
+    public Product(String name, float price, String size, String sweetLevel, String type, int categoryId) {
         this.id = -1;
         this.name = name;
         this.price = price;
         this.size = size;
         this.sweetLevel = sweetLevel;
         this.type = type;
-        this.category = category;
+        this.categoryId = categoryId;
     }
     
     public Product() {
@@ -49,7 +51,7 @@ public class Product {
         this.size = "";
         this.sweetLevel = "";
         this.type = "";
-        this.category = 0;
+        this.categoryId = 0;
     }
 
     public int getId() {
@@ -100,19 +102,28 @@ public class Product {
         this.type = type;
     }
 
-    public int getCategory() {
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", size=" + size + ", sweetLevel=" + sweetLevel + ", type=" + type + ", category=" + category + '}';
+        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", size=" + size + ", sweetLevel=" + sweetLevel + ", type=" + type + ", categoryId=" + categoryId + ", category=" + category + '}';
     }
 
+   
     
     public static Product fromRS(ResultSet rs) {
         Product product = new Product();
@@ -123,7 +134,11 @@ public class Product {
             product.setSize(rs.getString("product_size"));
             product.setSweetLevel(rs.getString("product_sweet_level"));
             product.setType(rs.getString("product_type"));
-            product.setCategory(rs.getInt("category_id"));
+            product.setCategoryId(rs.getInt("categoryId_id"));
+            
+            CategoryDao categoryDao = new CategoryDao();
+            Category category = categoryDao.get(product.getCategoryId());
+            product.setCategory(category);
 
         } catch (SQLException ex) {
             Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
