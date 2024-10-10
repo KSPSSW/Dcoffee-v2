@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextField;
 
 /**
  *
@@ -78,7 +79,7 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+}
 
     public int getRole() {
         return role;
@@ -117,4 +118,5 @@ public class User {
         }
         return user;
     }
+
 }
