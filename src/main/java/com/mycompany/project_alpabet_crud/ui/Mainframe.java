@@ -328,7 +328,7 @@ public class Mainframe extends javax.swing.JFrame {
 
     private void StockTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StockTabMousePressed
        setTabColor(StockTab);
-       scrPanel.setViewportView(new StockFrame());
+       scrPanel.setViewportView(new StockPanel());
     }//GEN-LAST:event_StockTabMousePressed
 
     private void MaterialTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaterialTabMousePressed

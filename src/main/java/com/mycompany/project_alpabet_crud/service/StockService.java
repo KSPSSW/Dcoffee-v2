@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class StockService {
     
-    public Stock getByName(String tel) {
+    public Stock getByName(String Name) {
         StockDao stockDao = new StockDao();
-        Stock stock = stockDao.getByName(tel);
+        Stock stock = stockDao.getByName(Name);
         return stock;
     }
     
