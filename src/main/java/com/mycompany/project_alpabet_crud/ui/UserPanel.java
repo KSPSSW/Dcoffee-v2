@@ -449,6 +449,7 @@ public class UserPanel extends javax.swing.JPanel {
     private void setFormToObject() {
         editedUser.setLogin(edtLogin.getText());
         editedUser.setName(edtName.getText());
+        editedUser.setPassword(edtPassword.getText());
         if (rbtMale.isSelected()) {
             editedUser.setGender("M");
         } else {
