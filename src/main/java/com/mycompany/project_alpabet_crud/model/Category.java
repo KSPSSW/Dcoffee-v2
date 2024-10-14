@@ -29,7 +29,7 @@ public class Category {
 
     public Category() {
          this.id = -1;
-         this.name = null;
+         this.name = "";
     }
     
 

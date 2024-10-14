@@ -22,7 +22,7 @@ public class CategoryDao implements Dao<Category> {
     @Override
     public Category get(int id) {
         Category category = null;
-        String sql = "SELECT * FROM PRODUCT WHERE category_id=?";
+        String sql = "SELECT * FROM category WHERE category_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class CategoryDao implements Dao<Category> {
     @Override
     public Category update(Category obj) {
         String sql = "UPDATE category"
-                + " SET category = ?"
+                + " SET category_name = ?"
                 + " WHERE category_id = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {

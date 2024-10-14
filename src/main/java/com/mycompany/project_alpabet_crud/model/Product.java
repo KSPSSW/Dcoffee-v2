@@ -134,7 +134,7 @@ public class Product {
             product.setSize(rs.getString("product_size"));
             product.setSweetLevel(rs.getString("product_sweet_level"));
             product.setType(rs.getString("product_type"));
-            product.setCategoryId(rs.getInt("categoryId_id"));
+            product.setCategoryId(rs.getInt("category_id"));
             
             CategoryDao categoryDao = new CategoryDao();
             Category category = categoryDao.get(product.getCategoryId());
