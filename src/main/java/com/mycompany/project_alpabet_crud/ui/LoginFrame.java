@@ -195,6 +195,8 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
         Mainframe mainFrame = new Mainframe(); // สร้างอ็อบเจกต์ของ MainFrame
         mainFrame.setVisible(true); // แสดง MainFrame
     } else {
+        edtLogin.setText("");
+        edtPassword.setText("");
         JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE); // แสดงข้อความล็อกอินไม่สำเร็จ
     }
 
