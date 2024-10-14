@@ -4,9 +4,11 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
+import com.mycompany.project_alpabet_crud.model.User;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,22 +28,35 @@ public class LoginFrame extends javax.swing.JFrame {
         setImage("passwordlogo", 65, 65, lblPasswordLogo);
         
     }
+    
+    private void login() {
+        String login = edtLogin.getText();
+        String password = new String(edtPassword.getPassword());
+
+        User user = userService.login(login, password);
+        if (user != null) {
+            JOptionPane.showMessageDialog(this, "Login successful!");
+            // แสดงหน้าใหม่หรือทำอย่างอื่นที่ต้องการ
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 private void setImage(String imageName, int widthImage, int heightImage, JLabel label) {
     // โหลดรูปภาพ
     ImageIcon icon = new ImageIcon("./" + imageName + ".png");
     Image image = icon.getImage();
     
-    // ตรวจสอบว่ารูปภาพถูกโหลดมาหรือไม่
+
     if (image != null && image.getWidth(null) > 0) {
-        // ขนาดเดิมของรูปภาพ
+        // ขนาดเดิม
         int originalWidth = image.getWidth(null);
         int originalHeight = image.getHeight(null);
 
-        // คำนวณอัตราส่วนของรูปภาพเดิม
+        // คำนวณอัตราส่วน
         float aspectRatio = (float) originalWidth / originalHeight;
 
-        // ขนาดใหม่ที่จะใช้
+        // ขนาดใหม่
         int newWidth = widthImage;
         int newHeight = heightImage;
 
@@ -61,7 +76,6 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
         icon.setImage(newImage);
         label.setIcon(icon);
     } else {
-        // หากไม่สามารถโหลดรูปภาพได้ ให้แสดงข้อความเตือน
         System.out.println("ไม่สามารถโหลดรูปภาพ: " + imageName + ".png");
     }
 }
@@ -177,7 +191,7 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
