@@ -13,32 +13,40 @@ import java.util.List;
  * @author PanisaraS
  */
 public class UserService {
-     public User login(String login, String password) {
+
+    public static User currentUser;
+
+    public User login(String login, String password) {
         UserDao userDao = new UserDao();
         User user = userDao.getByLogin(login);
-        if(user != null && user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password)) {
+            currentUser = user;
             return user;
         }
         return null;
     }
-    
-    public List<User>getUsers(){
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public List<User> getUsers() {
         UserDao userDao = new UserDao();
         return userDao.getAll(" user_login asc");
     }
 
     public User addNew(User editedUser) {
-        UserDao userDao= new UserDao();
+        UserDao userDao = new UserDao();
         return userDao.save(editedUser);
     }
 
     public User update(User editedUser) {
-        UserDao userDao= new UserDao();
+        UserDao userDao = new UserDao();
         return userDao.update(editedUser);
     }
 
     public int delete(User editedUser) {
-       UserDao userDao= new UserDao();
+        UserDao userDao = new UserDao();
         return userDao.delete(editedUser);
     }
 }

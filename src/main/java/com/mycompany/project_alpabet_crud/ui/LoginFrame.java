@@ -5,6 +5,7 @@
 package com.mycompany.project_alpabet_crud.ui;
 
 import com.mycompany.project_alpabet_crud.model.User;
+import com.mycompany.project_alpabet_crud.service.UserService;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,19 +29,7 @@ public class LoginFrame extends javax.swing.JFrame {
         setImage("passwordlogo", 65, 65, lblPasswordLogo);
         
     }
-    
-    private void login() {
-        String login = edtLogin.getText();
-        String password = new String(edtPassword.getPassword());
 
-        User user = userService.login(login, password);
-        if (user != null) {
-            JOptionPane.showMessageDialog(this, "Login successful!");
-            // แสดงหน้าใหม่หรือทำอย่างอื่นที่ต้องการ
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
 private void setImage(String imageName, int widthImage, int heightImage, JLabel label) {
     // โหลดรูปภาพ
@@ -191,6 +180,24 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+                                      
+    String login = edtLogin.getText();
+    String password = new String(edtPassword.getPassword());
+
+    UserService userService = new UserService();
+    User user = userService.login(login, password);
+
+    if (user != null) {
+        JOptionPane.showMessageDialog(this, "Login successful!");
+        this.dispose();
+
+        // เปิด MainFrame
+        Mainframe mainFrame = new Mainframe(); // สร้างอ็อบเจกต์ของ MainFrame
+        mainFrame.setVisible(true); // แสดง MainFrame
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE); // แสดงข้อความล็อกอินไม่สำเร็จ
+    }
+
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
