@@ -51,16 +51,22 @@ public class Mainframe extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         CustomerTab = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        logoCustomer = new javax.swing.JLabel();
         ProductTab = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        logoProduct = new javax.swing.JLabel();
         MaterialTab = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        logoMat = new javax.swing.JLabel();
         UserTab = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        logoUser = new javax.swing.JLabel();
         StockTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        logoStock = new javax.swing.JLabel();
         PosTab = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        logoPos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,20 +88,27 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Customer");
 
+        logoCustomer.setBackground(new java.awt.Color(204, 255, 204));
+        logoCustomer.setOpaque(true);
+
         javax.swing.GroupLayout CustomerTabLayout = new javax.swing.GroupLayout(CustomerTab);
         CustomerTab.setLayout(CustomerTabLayout);
         CustomerTabLayout.setHorizontalGroup(
             CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(logoCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
         );
         CustomerTabLayout.setVerticalGroup(
             CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustomerTabLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logoCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -113,12 +126,17 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Product");
 
+        logoProduct.setBackground(new java.awt.Color(204, 255, 204));
+        logoProduct.setOpaque(true);
+
         javax.swing.GroupLayout ProductTabLayout = new javax.swing.GroupLayout(ProductTab);
         ProductTab.setLayout(ProductTabLayout);
         ProductTabLayout.setHorizontalGroup(
             ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductTabLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(logoProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -126,7 +144,9 @@ public class Mainframe extends javax.swing.JFrame {
             ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logoProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -144,20 +164,27 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Material");
 
+        logoMat.setBackground(new java.awt.Color(204, 255, 204));
+        logoMat.setOpaque(true);
+
         javax.swing.GroupLayout MaterialTabLayout = new javax.swing.GroupLayout(MaterialTab);
         MaterialTab.setLayout(MaterialTabLayout);
         MaterialTabLayout.setHorizontalGroup(
             MaterialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MaterialTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoMat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
         );
         MaterialTabLayout.setVerticalGroup(
             MaterialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MaterialTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addGroup(MaterialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logoMat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -175,12 +202,17 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("User");
 
+        logoUser.setBackground(new java.awt.Color(204, 255, 204));
+        logoUser.setOpaque(true);
+
         javax.swing.GroupLayout UserTabLayout = new javax.swing.GroupLayout(UserTab);
         UserTab.setLayout(UserTabLayout);
         UserTabLayout.setHorizontalGroup(
             UserTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserTabLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(logoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -188,7 +220,9 @@ public class Mainframe extends javax.swing.JFrame {
             UserTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addGroup(UserTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logoUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -206,20 +240,27 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Stock");
 
+        logoStock.setBackground(new java.awt.Color(204, 255, 204));
+        logoStock.setOpaque(true);
+
         javax.swing.GroupLayout StockTabLayout = new javax.swing.GroupLayout(StockTab);
         StockTab.setLayout(StockTabLayout);
         StockTabLayout.setHorizontalGroup(
             StockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StockTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
         );
         StockTabLayout.setVerticalGroup(
             StockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StockTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addGroup(StockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logoStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -238,20 +279,27 @@ public class Mainframe extends javax.swing.JFrame {
         jLabel5.setText("POS");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        logoPos.setBackground(new java.awt.Color(204, 255, 204));
+        logoPos.setOpaque(true);
+
         javax.swing.GroupLayout PosTabLayout = new javax.swing.GroupLayout(PosTab);
         PosTab.setLayout(PosTabLayout);
         PosTabLayout.setHorizontalGroup(
             PosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PosTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoPos, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PosTabLayout.setVerticalGroup(
             PosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PosTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                .addGroup(PosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(logoPos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -391,6 +439,12 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel logoCustomer;
+    private javax.swing.JLabel logoMat;
+    private javax.swing.JLabel logoPos;
+    private javax.swing.JLabel logoProduct;
+    private javax.swing.JLabel logoStock;
+    private javax.swing.JLabel logoUser;
     private javax.swing.JScrollPane scrPanel;
     // End of variables declaration//GEN-END:variables
 }
