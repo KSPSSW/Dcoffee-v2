@@ -22,55 +22,50 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
-        
-        setImage("logo",160,160,lblLogo);
+
+        setImage("logo", 160, 160, lblLogo);
         setImage("backgroundLogin", 2000, 750, lblBackground);
-        setImage("userlogo",65,65,lblUserLogo);
+        setImage("userlogo", 65, 65, lblUserLogo);
         setImage("passwordlogo", 65, 65, lblPasswordLogo);
-        
+
     }
 
+    public static void setImage(String imageName, int widthImage, int heightImage, JLabel label) {
+        // โหลดรูปภาพ
+        ImageIcon icon = new ImageIcon("./" + imageName + ".png");
+        Image image = icon.getImage();
 
-private void setImage(String imageName, int widthImage, int heightImage, JLabel label) {
-    // โหลดรูปภาพ
-    ImageIcon icon = new ImageIcon("./" + imageName + ".png");
-    Image image = icon.getImage();
-    
+        if (image != null && image.getWidth(null) > 0) {
+            // ขนาดเดิม
+            int originalWidth = image.getWidth(null);
+            int originalHeight = image.getHeight(null);
 
-    if (image != null && image.getWidth(null) > 0) {
-        // ขนาดเดิม
-        int originalWidth = image.getWidth(null);
-        int originalHeight = image.getHeight(null);
+            // คำนวณอัตราส่วน
+            float aspectRatio = (float) originalWidth / originalHeight;
 
-        // คำนวณอัตราส่วน
-        float aspectRatio = (float) originalWidth / originalHeight;
+            // ขนาดใหม่
+            int newWidth = widthImage;
+            int newHeight = heightImage;
 
-        // ขนาดใหม่
-        int newWidth = widthImage;
-        int newHeight = heightImage;
+            // คำนวณขนาดใหม่ตามอัตราส่วน โดยปรับตามความกว้างหรือความสูงก่อน
+            if (widthImage / (float) heightImage > aspectRatio) {
+                // ปรับตามความสูงที่กำหนด เพราะสัดส่วนที่ต้องการกว้างเกินไป
+                newWidth = (int) (heightImage * aspectRatio);
+            } else {
+                // ปรับตามความกว้างที่กำหนด เพราะสัดส่วนที่ต้องการสูงเกินไป
+                newHeight = (int) (widthImage / aspectRatio);
+            }
 
-        // คำนวณขนาดใหม่ตามอัตราส่วน โดยปรับตามความกว้างหรือความสูงก่อน
-        if (widthImage / (float) heightImage > aspectRatio) {
-            // ปรับตามความสูงที่กำหนด เพราะสัดส่วนที่ต้องการกว้างเกินไป
-            newWidth = (int) (heightImage * aspectRatio);
+            // ปรับขนาดรูปภาพใหม่
+            Image newImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+            // ตั้งค่า ImageIcon ใหม่ที่ปรับขนาดแล้ว
+            icon.setImage(newImage);
+            label.setIcon(icon);
         } else {
-            // ปรับตามความกว้างที่กำหนด เพราะสัดส่วนที่ต้องการสูงเกินไป
-            newHeight = (int) (widthImage / aspectRatio);
+            System.out.println("ไม่สามารถโหลดรูปภาพ: " + imageName + ".png");
         }
-
-        // ปรับขนาดรูปภาพใหม่
-        Image newImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-        // ตั้งค่า ImageIcon ใหม่ที่ปรับขนาดแล้ว
-        icon.setImage(newImage);
-        label.setIcon(icon);
-    } else {
-        System.out.println("ไม่สามารถโหลดรูปภาพ: " + imageName + ".png");
     }
-}
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -181,24 +176,24 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-                                      
-    String login = edtLogin.getText();
-    String password = new String(edtPassword.getPassword());
 
-    UserService userService = new UserService();
-    User user = userService.login(login, password);
+        String login = edtLogin.getText();
+        String password = new String(edtPassword.getPassword());
 
-    if (user != null) {
-        this.dispose();
+        UserService userService = new UserService();
+        User user = userService.login(login, password);
 
-        // เปิด MainFrame
-        Mainframe mainFrame = new Mainframe(); // สร้างอ็อบเจกต์ของ MainFrame
-        mainFrame.setVisible(true); // แสดง MainFrame
-    } else {
-        edtLogin.setText("");
-        edtPassword.setText("");
-        JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE); // แสดงข้อความล็อกอินไม่สำเร็จ
-    }
+        if (user != null) {
+            this.dispose();
+
+            // เปิด MainFrame
+            Mainframe mainFrame = new Mainframe(); // สร้างอ็อบเจกต์ของ MainFrame
+            mainFrame.setVisible(true); // แสดง MainFrame
+        } else {
+            edtLogin.setText("");
+            edtPassword.setText("");
+            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE); // แสดงข้อความล็อกอินไม่สำเร็จ
+        }
 
 
     }//GEN-LAST:event_btnLoginActionPerformed

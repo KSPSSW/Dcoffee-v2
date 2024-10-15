@@ -5,6 +5,9 @@
 package com.mycompany.project_alpabet_crud.ui;
 
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -22,7 +25,7 @@ public class Mainframe extends javax.swing.JFrame {
         initComponents();
         DefaultColor = new Color(255,255,255);
         ClickColor = new Color(200, 162, 127);
-        
+        setLogoImage("logoPos", 56, 56, lblPos);
 
     }
 
@@ -36,6 +39,45 @@ public class Mainframe extends javax.swing.JFrame {
 
         selectedTab.setBackground(ClickColor);
     }
+
+            
+    public void setLogoImage(String imageName, int widthImage, int heightImage, JLabel label) {
+        // โหลดรูปภาพ
+        ImageIcon icon = new ImageIcon("./" + imageName + ".png");
+        Image image = icon.getImage();
+
+        if (image != null && image.getWidth(null) > 0) {
+            // ขนาดเดิม
+            int originalWidth = image.getWidth(null);
+            int originalHeight = image.getHeight(null);
+
+            // คำนวณอัตราส่วน
+            float aspectRatio = (float) originalWidth / originalHeight;
+
+            // ขนาดใหม่
+            int newWidth = widthImage;
+            int newHeight = heightImage;
+
+            // คำนวณขนาดใหม่ตามอัตราส่วน โดยปรับตามความกว้างหรือความสูงก่อน
+            if (widthImage / (float) heightImage > aspectRatio) {
+                // ปรับตามความสูงที่กำหนด เพราะสัดส่วนที่ต้องการกว้างเกินไป
+                newWidth = (int) (heightImage * aspectRatio);
+            } else {
+                // ปรับตามความกว้างที่กำหนด เพราะสัดส่วนที่ต้องการสูงเกินไป
+                newHeight = (int) (widthImage / aspectRatio);
+            }
+
+            // ปรับขนาดรูปภาพใหม่
+            Image newImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+            // ตั้งค่า ImageIcon ใหม่ที่ปรับขนาดแล้ว
+            icon.setImage(newImage);
+            label.setIcon(icon);
+        } else {
+            System.out.println("ไม่สามารถโหลดรูปภาพ: " + imageName + ".png");
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,25 +93,27 @@ public class Mainframe extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         CustomerTab = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        logoCustomer = new javax.swing.JLabel();
+        lblCustomer = new javax.swing.JLabel();
         ProductTab = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        logoProduct = new javax.swing.JLabel();
+        lblProduct = new javax.swing.JLabel();
         MaterialTab = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        logoMat = new javax.swing.JLabel();
+        lblMaterial = new javax.swing.JLabel();
         UserTab = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        logoUser = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         StockTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        logoStock = new javax.swing.JLabel();
+        lblStock = new javax.swing.JLabel();
         PosTab = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        logoPos = new javax.swing.JLabel();
+        lblPos = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        scrPanel.setBackground(new java.awt.Color(255, 255, 255));
         scrPanel.setPreferredSize(new java.awt.Dimension(1055, 600));
 
         jPanel3.setBackground(new java.awt.Color(231, 212, 187));
@@ -85,11 +129,11 @@ public class Mainframe extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Customer");
 
-        logoCustomer.setBackground(new java.awt.Color(204, 255, 204));
-        logoCustomer.setOpaque(true);
+        lblCustomer.setBackground(new java.awt.Color(255, 255, 255));
+        lblCustomer.setOpaque(true);
 
         javax.swing.GroupLayout CustomerTabLayout = new javax.swing.GroupLayout(CustomerTab);
         CustomerTab.setLayout(CustomerTabLayout);
@@ -97,7 +141,7 @@ public class Mainframe extends javax.swing.JFrame {
             CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
@@ -107,7 +151,7 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logoCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -123,11 +167,11 @@ public class Mainframe extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Product");
 
-        logoProduct.setBackground(new java.awt.Color(204, 255, 204));
-        logoProduct.setOpaque(true);
+        lblProduct.setBackground(new java.awt.Color(255, 255, 255));
+        lblProduct.setOpaque(true);
 
         javax.swing.GroupLayout ProductTabLayout = new javax.swing.GroupLayout(ProductTab);
         ProductTab.setLayout(ProductTabLayout);
@@ -135,7 +179,7 @@ public class Mainframe extends javax.swing.JFrame {
             ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -145,7 +189,7 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ProductTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logoProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -161,11 +205,11 @@ public class Mainframe extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Material");
 
-        logoMat.setBackground(new java.awt.Color(204, 255, 204));
-        logoMat.setOpaque(true);
+        lblMaterial.setBackground(new java.awt.Color(255, 255, 255));
+        lblMaterial.setOpaque(true);
 
         javax.swing.GroupLayout MaterialTabLayout = new javax.swing.GroupLayout(MaterialTab);
         MaterialTab.setLayout(MaterialTabLayout);
@@ -173,7 +217,7 @@ public class Mainframe extends javax.swing.JFrame {
             MaterialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MaterialTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoMat, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
@@ -183,7 +227,7 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MaterialTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MaterialTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logoMat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -199,11 +243,11 @@ public class Mainframe extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("User");
 
-        logoUser.setBackground(new java.awt.Color(204, 255, 204));
-        logoUser.setOpaque(true);
+        lblUser.setBackground(new java.awt.Color(255, 255, 255));
+        lblUser.setOpaque(true);
 
         javax.swing.GroupLayout UserTabLayout = new javax.swing.GroupLayout(UserTab);
         UserTab.setLayout(UserTabLayout);
@@ -211,7 +255,7 @@ public class Mainframe extends javax.swing.JFrame {
             UserTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -221,7 +265,7 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(UserTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logoUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -237,11 +281,11 @@ public class Mainframe extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Stock");
 
-        logoStock.setBackground(new java.awt.Color(204, 255, 204));
-        logoStock.setOpaque(true);
+        lblStock.setBackground(new java.awt.Color(255, 255, 255));
+        lblStock.setOpaque(true);
 
         javax.swing.GroupLayout StockTabLayout = new javax.swing.GroupLayout(StockTab);
         StockTab.setLayout(StockTabLayout);
@@ -249,7 +293,7 @@ public class Mainframe extends javax.swing.JFrame {
             StockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StockTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoStock, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblStock, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
@@ -259,7 +303,7 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StockTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(StockTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logoStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -275,12 +319,12 @@ public class Mainframe extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("POS");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        logoPos.setBackground(new java.awt.Color(204, 255, 204));
-        logoPos.setOpaque(true);
+        lblPos.setBackground(new java.awt.Color(255, 255, 255));
+        lblPos.setOpaque(true);
 
         javax.swing.GroupLayout PosTabLayout = new javax.swing.GroupLayout(PosTab);
         PosTab.setLayout(PosTabLayout);
@@ -288,9 +332,9 @@ public class Mainframe extends javax.swing.JFrame {
             PosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PosTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoPos, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(lblPos, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PosTabLayout.setVerticalGroup(
@@ -299,7 +343,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PosTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                    .addComponent(logoPos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblPos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -333,7 +377,20 @@ public class Mainframe extends javax.swing.JFrame {
                 .addComponent(MaterialTab, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(UserTab, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(231, 212, 187));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -344,16 +401,23 @@ public class Mainframe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1047, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(scrPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -371,7 +435,7 @@ public class Mainframe extends javax.swing.JFrame {
 
     private void PosTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosTabMousePressed
        setTabColor(PosTab);
-       scrPanel.setViewportView(new PosPanel());
+       scrPanel.setViewportView(new PosPanel());       
     }//GEN-LAST:event_PosTabMousePressed
 
     private void StockTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StockTabMousePressed
@@ -437,14 +501,15 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel logoCustomer;
-    private javax.swing.JLabel logoMat;
-    private javax.swing.JLabel logoPos;
-    private javax.swing.JLabel logoProduct;
-    private javax.swing.JLabel logoStock;
-    private javax.swing.JLabel logoUser;
+    private javax.swing.JLabel lblCustomer;
+    private javax.swing.JLabel lblMaterial;
+    private javax.swing.JLabel lblPos;
+    private javax.swing.JLabel lblProduct;
+    private javax.swing.JLabel lblStock;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JScrollPane scrPanel;
     // End of variables declaration//GEN-END:variables
 }
