@@ -48,7 +48,7 @@ public class Mainframe extends javax.swing.JFrame {
             
     public void setLogoImage(String imageName, int widthImage, int heightImage, JLabel label) {
         // โหลดรูปภาพ
-        ImageIcon icon = new ImageIcon("./" + imageName + ".png");
+        ImageIcon icon = new ImageIcon("./mainframepic/" + imageName + ".png");
         Image image = icon.getImage();
 
         if (image != null && image.getWidth(null) > 0) {

@@ -43,7 +43,7 @@ public class ProductDialog extends javax.swing.JDialog {
 
     private void loadImage() {
         if (editedProduct.getId() > 0) {
-            ImageIcon icon = new ImageIcon("./product" + editedProduct.getId() + ".png");
+            ImageIcon icon = new ImageIcon("./productpic/product" + editedProduct.getId() + ".png");
             Image image = icon.getImage();
             Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             icon.setImage(newImage);

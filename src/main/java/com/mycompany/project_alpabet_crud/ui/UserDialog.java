@@ -39,7 +39,7 @@ public class UserDialog extends javax.swing.JDialog {
 
     private void loadImage() {
         if(editedUser.getId()>0){
-            ImageIcon icon  = new ImageIcon("./user"+editedUser.getId() + ".png");
+            ImageIcon icon  = new ImageIcon("./userpic/user"+editedUser.getId() + ".png");
             Image image = icon.getImage();
             Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             icon.setImage(newImage);
@@ -299,7 +299,7 @@ public class UserDialog extends javax.swing.JDialog {
         if(path == null || path.isEmpty()) return;
         try {
             BufferedImage image = ImageIO.read(new File(path));
-            ImageIO.write(image, "png", new File("./user" + user.getId() +".png"));
+            ImageIO.write(image, "png", new File("./userpic/user" + user.getId() +".png"));
         } catch (IOException ex) {
             Logger.getLogger(UserDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

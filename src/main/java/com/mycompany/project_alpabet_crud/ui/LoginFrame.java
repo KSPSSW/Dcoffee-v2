@@ -32,7 +32,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
     public static void setImage(String imageName, int widthImage, int heightImage, JLabel label) {
         // โหลดรูปภาพ
-        ImageIcon icon = new ImageIcon("./" + imageName + ".png");
+        ImageIcon icon = new ImageIcon("./loginframepic/" + imageName + ".png");
         Image image = icon.getImage();
 
         if (image != null && image.getWidth(null) > 0) {
