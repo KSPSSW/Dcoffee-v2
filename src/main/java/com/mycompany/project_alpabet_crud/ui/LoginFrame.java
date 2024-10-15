@@ -93,6 +93,7 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255,80));
@@ -155,7 +156,7 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
                         .addGap(34, 34, 34))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(38, 38, 38)
                         .addComponent(lblSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblUserLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,7 +166,7 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
                         .addComponent(lblPasswordLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addComponent(edtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)))
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +189,6 @@ private void setImage(String imageName, int widthImage, int heightImage, JLabel 
     User user = userService.login(login, password);
 
     if (user != null) {
-        JOptionPane.showMessageDialog(this, "Login successful!");
         this.dispose();
 
         // เปิด MainFrame
