@@ -28,9 +28,14 @@ public class Mainframe extends javax.swing.JFrame {
 
     public Mainframe() {
         initComponents();
+        //        scrPanel.setViewportView(new Main());      wait for main
+
         if (user != null) { //check role for permission
             if (user.getRole() != 0) {
                 UserTab.setVisible(false);
+                lblHeader.setText("MAIN MENU OF EMPLOYEE");
+            } else {
+                lblHeader.setText("MAIN MENU OF MANAGER");
             }
             UserDialog userDialog = new UserDialog(this, user); //call for method loadImage
             lblUserName.setText("Username :" + user.getName()); //Name
@@ -620,7 +625,7 @@ public class Mainframe extends javax.swing.JFrame {
     }//GEN-LAST:event_UserTabMousePressed
 
     private void PosTab1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosTab1MousePressed
-
+//        scrPanel.setViewportView(new Main());
         if (user != null) {
             if (user.getRole() == 0) {
                 lblHeader.setText("MAIN MENU OF MANAGER");

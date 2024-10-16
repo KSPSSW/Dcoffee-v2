@@ -5,22 +5,17 @@
 package com.mycompany.project_alpabet_crud.component;
 
 import com.mycompany.project_alpabet_crud.model.Product;
-
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 /**
  *
  * @author informatics
  */
-public class ProductItemPanel extends javax.swing.JPanel {
+public class ProductItemPanelOld extends javax.swing.JPanel  {
 
     private ArrayList<BuyProductable> subscribers = new ArrayList<>();
     private final Product product;
@@ -28,7 +23,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProductItemPanel
      */
-    public ProductItemPanel(Product p) {
+    public ProductItemPanelOld(Product p) {
         initComponents();
         product = p;
         lblName.setText(product.getName());
@@ -44,10 +39,6 @@ public class ProductItemPanel extends javax.swing.JPanel {
         lblIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (p.getCategoryId() == 1) {               //only CategoryId == 1    only coffee
-                    openDialog();
-                    return;
-                }
                 for (BuyProductable s : subscribers) {
                     s.buy(product, Integer.parseInt(txtQty.getText()));
                 }
@@ -59,20 +50,6 @@ public class ProductItemPanel extends javax.swing.JPanel {
     public void addOnByProduct(BuyProductable subscriber) {
         subscribers.add(subscriber);
 
-    }
-
-    private void openDialog() {
-        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
-        ProductSaleDialog productsaleDialog = new ProductSaleDialog(frame, product);
-        productsaleDialog.setLocationRelativeTo(this);
-        productsaleDialog.setVisible(true);
-        productsaleDialog.addWindowListener(new WindowAdapter() {
-
-        });
-
-        for (BuyProductable s : subscribers) { // add ProductSaleDialog to Subscriber
-            productsaleDialog.addOnByProduct(s);
-        }
     }
 
     /**
@@ -194,16 +171,14 @@ public class ProductItemPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
-        int newQty = Integer.parseInt(txtQty.getText()) + 1;
-        txtQty.setText("" + newQty);
+        int newQty = Integer.parseInt(txtQty.getText())+1;
+        txtQty.setText(""+newQty);
     }//GEN-LAST:event_btnPlusActionPerformed
 
     private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
-        int newQty = Integer.parseInt(txtQty.getText()) - 1;
-        if (newQty < 1) {
-            return;
-        }
-        txtQty.setText("" + newQty);
+        int newQty = Integer.parseInt(txtQty.getText())-1;
+        if(newQty<1) return;
+        txtQty.setText(""+newQty);
     }//GEN-LAST:event_btnMinusActionPerformed
 
 
@@ -218,4 +193,5 @@ public class ProductItemPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtQty;
     // End of variables declaration//GEN-END:variables
 
+   
 }
