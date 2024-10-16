@@ -43,7 +43,7 @@ public class CustomerDialog extends javax.swing.JDialog {
 
     private void loadImage() {
         if (editCustomer.getId() > 0) {
-            ImageIcon icon = new ImageIcon("./customer" + editCustomer.getId() + ".png");
+            ImageIcon icon = new ImageIcon("./customerpic/customer" + editCustomer.getId() + ".png");
             Image image = icon.getImage();
             Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             icon.setImage(newImage);
@@ -261,7 +261,7 @@ public class CustomerDialog extends javax.swing.JDialog {
         }
         try {
             BufferedImage image = ImageIO.read(new File(path));
-            ImageIO.write(image, "png", new File("./customer" + user.getId() + ".png"));
+            ImageIO.write(image, "png", new File("./customerpic/customer" + user.getId() + ".png"));
         } catch (IOException ex) {
             Logger.getLogger(UserDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

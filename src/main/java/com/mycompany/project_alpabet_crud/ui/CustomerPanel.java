@@ -68,7 +68,7 @@ public class CustomerPanel extends javax.swing.JPanel {
                 Customer user = list.get(rowIndex);
                 switch (columnIndex) {
                     case 0:
-                        ImageIcon icon = new ImageIcon("./customer" +user.getId() +".png");
+                        ImageIcon icon = new ImageIcon("./customerpic/customer" +user.getId() +".png");
                         Image image = icon.getImage();
                         int width = image.getWidth(null);
                         int height = image.getHeight(null);
