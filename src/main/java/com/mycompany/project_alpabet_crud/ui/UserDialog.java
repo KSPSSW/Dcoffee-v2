@@ -55,6 +55,13 @@ public class UserDialog extends javax.swing.JDialog {
             lblPhoto.setIcon(icon);
         }
     }
+    public void loadImage(javax.swing.JLabel label, String path) {
+        ImageIcon icon = new ImageIcon(path);
+        Image image = icon.getImage();
+        Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        icon.setImage(newImage);
+        label.setIcon(icon);
+    }
     
     public void chooseImage() {
         JFileChooser fileChooser = new JFileChooser();

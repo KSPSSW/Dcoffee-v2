@@ -4,6 +4,8 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
+import com.mycompany.project_alpabet_crud.model.User;
+import com.mycompany.project_alpabet_crud.service.UserService;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -23,7 +25,20 @@ public class Mainframe extends javax.swing.JFrame {
 
     public Mainframe() {
         initComponents();
-        DefaultColor = new Color(255,255,255);
+        UserService userService = new UserService();
+        User user = userService.getCurrentUser();
+        if (user != null) {
+            UserDialog userDialog = new UserDialog(this, user);
+            lblUserName.setText("Username :" + user.getName());
+            if (user.getRole() == 0) {
+                lblRole.setText("Role : Admin");
+            } else {
+                lblRole.setText("Role : User");
+            }
+            userDialog.loadImage(lblUserPic, "./userpic/user" + user.getId() + ".png");
+        }
+
+        DefaultColor = new Color(255, 255, 255);
         ClickColor = new Color(200, 162, 127);
         setLogoImage("logoPos", 56, 56, lblPos);
         setLogoImage("logoCus", 56, 56, lblCustomer);
@@ -45,7 +60,6 @@ public class Mainframe extends javax.swing.JFrame {
         selectedTab.setBackground(ClickColor);
     }
 
-            
     public void setLogoImage(String imageName, int widthImage, int heightImage, JLabel label) {
         // โหลดรูปภาพ
         ImageIcon icon = new ImageIcon("./mainframepic/" + imageName + ".png");
@@ -82,7 +96,6 @@ public class Mainframe extends javax.swing.JFrame {
             System.out.println("ไม่สามารถโหลดรูปภาพ: " + imageName + ".png");
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,8 +135,8 @@ public class Mainframe extends javax.swing.JFrame {
         lblMainLogo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblUserPic = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
+        lblRole = new javax.swing.JLabel();
         scrPanel = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -497,11 +510,11 @@ public class Mainframe extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(231, 212, 187));
 
-        jLabel1.setFont(new java.awt.Font("K2D", 0, 14)); // NOI18N
-        jLabel1.setText("Username :");
+        lblUserName.setFont(new java.awt.Font("K2D", 0, 14)); // NOI18N
+        lblUserName.setText("Username :");
 
-        jLabel2.setFont(new java.awt.Font("K2D", 0, 14)); // NOI18N
-        jLabel2.setText("Role :");
+        lblRole.setFont(new java.awt.Font("K2D", 0, 14)); // NOI18N
+        lblRole.setText("Role :");
 
         scrPanel.setBackground(new java.awt.Color(255, 255, 255));
         scrPanel.setPreferredSize(new java.awt.Dimension(1055, 600));
@@ -510,31 +523,32 @@ public class Mainframe extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(704, Short.MAX_VALUE)
-                .addComponent(lblUserPic, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(135, 135, 135))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblUserPic, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                            .addComponent(lblRole, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(scrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-                    .addComponent(lblUserPic, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(lblRole, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUserPic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(scrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -569,23 +583,23 @@ public class Mainframe extends javax.swing.JFrame {
     }//GEN-LAST:event_ProductTabMousePressed
 
     private void PosTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosTabMousePressed
-       setTabColor(PosTab);
-       scrPanel.setViewportView(new PosPanel());       
+        setTabColor(PosTab);
+        scrPanel.setViewportView(new PosPanel());
     }//GEN-LAST:event_PosTabMousePressed
 
     private void StockTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StockTabMousePressed
-       setTabColor(StockTab);
-       scrPanel.setViewportView(new StockPanel());
+        setTabColor(StockTab);
+        scrPanel.setViewportView(new StockPanel());
     }//GEN-LAST:event_StockTabMousePressed
 
     private void MaterialTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaterialTabMousePressed
-       setTabColor(MaterialTab);
-       scrPanel.setViewportView(new MaterialPanel());
+        setTabColor(MaterialTab);
+        scrPanel.setViewportView(new MaterialPanel());
     }//GEN-LAST:event_MaterialTabMousePressed
 
     private void UserTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserTabMousePressed
-       setTabColor(UserTab);
-       scrPanel.setViewportView(new UserPanel());
+        setTabColor(UserTab);
+        scrPanel.setViewportView(new UserPanel());
     }//GEN-LAST:event_UserTabMousePressed
 
     private void PosTab1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosTab1MousePressed
@@ -640,10 +654,8 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JPanel ProductTab;
     private javax.swing.JPanel StockTab;
     private javax.swing.JPanel UserTab;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -660,8 +672,10 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JLabel lblOut;
     private javax.swing.JLabel lblPos;
     private javax.swing.JLabel lblProduct;
+    private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblStock;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblUserPic;
     private javax.swing.JScrollPane scrPanel;
     // End of variables declaration//GEN-END:variables
