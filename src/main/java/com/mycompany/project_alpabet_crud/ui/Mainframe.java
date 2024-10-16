@@ -129,7 +129,7 @@ public class Mainframe extends javax.swing.JFrame {
         PosTab1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         lblMain = new javax.swing.JLabel();
-        PosTab2 = new javax.swing.JPanel();
+        LogoutTab = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         lblOut = new javax.swing.JLabel();
         lblMainLogo = new javax.swing.JPanel();
@@ -398,7 +398,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PosTab1Layout.setVerticalGroup(
@@ -406,18 +406,18 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(PosTab1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PosTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        PosTab2.setBackground(new java.awt.Color(255, 255, 255));
-        PosTab2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        PosTab2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        PosTab2.setPreferredSize(new java.awt.Dimension(225, 40));
-        PosTab2.addMouseListener(new java.awt.event.MouseAdapter() {
+        LogoutTab.setBackground(new java.awt.Color(255, 255, 255));
+        LogoutTab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        LogoutTab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LogoutTab.setPreferredSize(new java.awt.Dimension(225, 40));
+        LogoutTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                PosTab2MousePressed(evt);
+                LogoutTabMousePressed(evt);
             }
         });
 
@@ -429,24 +429,24 @@ public class Mainframe extends javax.swing.JFrame {
         lblOut.setBackground(new java.awt.Color(255, 255, 255));
         lblOut.setOpaque(true);
 
-        javax.swing.GroupLayout PosTab2Layout = new javax.swing.GroupLayout(PosTab2);
-        PosTab2.setLayout(PosTab2Layout);
-        PosTab2Layout.setHorizontalGroup(
-            PosTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PosTab2Layout.createSequentialGroup()
+        javax.swing.GroupLayout LogoutTabLayout = new javax.swing.GroupLayout(LogoutTab);
+        LogoutTab.setLayout(LogoutTabLayout);
+        LogoutTabLayout.setHorizontalGroup(
+            LogoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LogoutTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblOut, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        PosTab2Layout.setVerticalGroup(
-            PosTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PosTab2Layout.createSequentialGroup()
+        LogoutTabLayout.setVerticalGroup(
+            LogoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LogoutTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PosTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                    .addComponent(lblOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(LogoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -477,7 +477,7 @@ public class Mainframe extends javax.swing.JFrame {
                     .addComponent(UserTab, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                     .addComponent(PosTab, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                     .addComponent(PosTab1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                    .addComponent(PosTab2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+                    .addComponent(LogoutTab, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
@@ -504,7 +504,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(UserTab, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PosTab2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LogoutTab, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -606,9 +606,12 @@ public class Mainframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PosTab1MousePressed
 
-    private void PosTab2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosTab2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PosTab2MousePressed
+    private void LogoutTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutTabMousePressed
+        this.dispose();
+        
+        LoginFrame loginFrame = new LoginFrame();
+        loginFrame.setVisible(true);
+    }//GEN-LAST:event_LogoutTabMousePressed
 
     /**
      * @param args the command line arguments
@@ -647,10 +650,10 @@ public class Mainframe extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CustomerTab;
+    private javax.swing.JPanel LogoutTab;
     private javax.swing.JPanel MaterialTab;
     private javax.swing.JPanel PosTab;
     private javax.swing.JPanel PosTab1;
-    private javax.swing.JPanel PosTab2;
     private javax.swing.JPanel ProductTab;
     private javax.swing.JPanel StockTab;
     private javax.swing.JPanel UserTab;

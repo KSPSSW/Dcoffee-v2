@@ -65,7 +65,7 @@
                       <Component id="UserTab" alignment="0" pref="211" max="32767" attributes="0"/>
                       <Component id="PosTab" alignment="0" pref="211" max="32767" attributes="0"/>
                       <Component id="PosTab1" alignment="0" pref="211" max="32767" attributes="0"/>
-                      <Component id="PosTab2" alignment="0" pref="211" max="32767" attributes="0"/>
+                      <Component id="LogoutTab" alignment="0" pref="211" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -96,7 +96,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="UserTab" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="PosTab2" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="LogoutTab" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -530,7 +530,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblMain" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel7" pref="135" max="32767" attributes="0"/>
+                      <Component id="jLabel7" pref="149" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -540,7 +540,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel7" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                           <Component id="lblMain" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -571,7 +571,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="PosTab2">
+        <Container class="javax.swing.JPanel" name="LogoutTab">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -589,7 +589,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PosTab2MousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LogoutTabMousePressed"/>
           </Events>
 
           <Layout>
@@ -609,8 +609,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel11" alignment="0" pref="56" max="32767" attributes="0"/>
-                          <Component id="lblOut" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblOut" max="32767" attributes="0"/>
+                          <Component id="jLabel11" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
