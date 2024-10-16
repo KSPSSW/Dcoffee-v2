@@ -124,7 +124,7 @@ public class UserPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblUser);
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(200, 162, 127));
 
         btnAdd.setBackground(new java.awt.Color(204, 255, 204));
         btnAdd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
