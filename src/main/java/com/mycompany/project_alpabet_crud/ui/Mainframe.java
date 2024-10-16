@@ -23,19 +23,23 @@ public class Mainframe extends javax.swing.JFrame {
      */
     Color DefaultColor, ClickColor;
 
+    UserService userService = new UserService();
+    User user = userService.getCurrentUser();
+
     public Mainframe() {
         initComponents();
-        UserService userService = new UserService();
-        User user = userService.getCurrentUser();
-        if (user != null) {
-            UserDialog userDialog = new UserDialog(this, user);
-            lblUserName.setText("Username :" + user.getName());
-            if (user.getRole() == 0) {
+        if (user != null) { //check role for permission
+            if (user.getRole() != 0) {
+                UserTab.setVisible(false);
+            }
+            UserDialog userDialog = new UserDialog(this, user); //call for method loadImage
+            lblUserName.setText("Username :" + user.getName()); //Name
+            if (user.getRole() == 0) { //Role
                 lblRole.setText("Role : Admin");
             } else {
                 lblRole.setText("Role : User");
             }
-            userDialog.loadImage(lblUserPic, "./userpic/user" + user.getId() + ".png");
+            userDialog.loadImage(lblUserPic, "./userpic/user" + user.getId() + ".png"); // Picture
         }
 
         DefaultColor = new Color(255, 255, 255);
@@ -138,6 +142,7 @@ public class Mainframe extends javax.swing.JFrame {
         lblUserName = new javax.swing.JLabel();
         lblRole = new javax.swing.JLabel();
         scrPanel = new javax.swing.JScrollPane();
+        lblHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -398,7 +403,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblMain, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PosTab1Layout.setVerticalGroup(
@@ -406,7 +411,7 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(PosTab1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PosTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                     .addComponent(lblMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -446,7 +451,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(LogoutTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -519,6 +524,9 @@ public class Mainframe extends javax.swing.JFrame {
         scrPanel.setBackground(new java.awt.Color(255, 255, 255));
         scrPanel.setPreferredSize(new java.awt.Dimension(1055, 600));
 
+        lblHeader.setFont(new java.awt.Font("Tahoma", 0, 60)); // NOI18N
+        lblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -526,8 +534,9 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblUserPic, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -547,7 +556,9 @@ public class Mainframe extends javax.swing.JFrame {
                         .addComponent(lblRole, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblUserPic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUserPic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(scrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                 .addContainerGap())
@@ -574,41 +585,54 @@ public class Mainframe extends javax.swing.JFrame {
 
     private void CustomerTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTabMousePressed
         setTabColor(CustomerTab);
+        lblHeader.setText("CUSTOMER");
         scrPanel.setViewportView(new CustomerPanel());
     }//GEN-LAST:event_CustomerTabMousePressed
 
     private void ProductTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductTabMousePressed
         setTabColor(ProductTab);
+        lblHeader.setText("PRODUCT");
         scrPanel.setViewportView(new ProductPanel());
     }//GEN-LAST:event_ProductTabMousePressed
 
     private void PosTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosTabMousePressed
         setTabColor(PosTab);
+        lblHeader.setText("POINT OF SALE");
         scrPanel.setViewportView(new PosPanel());
     }//GEN-LAST:event_PosTabMousePressed
 
     private void StockTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StockTabMousePressed
         setTabColor(StockTab);
+        lblHeader.setText("STOCK");
         scrPanel.setViewportView(new StockPanel());
     }//GEN-LAST:event_StockTabMousePressed
 
     private void MaterialTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaterialTabMousePressed
         setTabColor(MaterialTab);
+        lblHeader.setText("MATERIAL");
         scrPanel.setViewportView(new MaterialPanel());
     }//GEN-LAST:event_MaterialTabMousePressed
 
     private void UserTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserTabMousePressed
         setTabColor(UserTab);
+        lblHeader.setText("USER");
         scrPanel.setViewportView(new UserPanel());
     }//GEN-LAST:event_UserTabMousePressed
 
     private void PosTab1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosTab1MousePressed
-        // TODO add your handling code here:
+
+        if (user != null) {
+            if (user.getRole() == 0) {
+                lblHeader.setText("MAIN MENU OF MANAGER");
+            } else {
+                lblHeader.setText("MAIN MENU OF EMPLOYEE");
+            }
+        }
     }//GEN-LAST:event_PosTab1MousePressed
 
     private void LogoutTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutTabMousePressed
         this.dispose();
-        
+
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setVisible(true);
     }//GEN-LAST:event_LogoutTabMousePressed
@@ -669,6 +693,7 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCustomer;
+    private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblMain;
     private javax.swing.JPanel lblMainLogo;
     private javax.swing.JLabel lblMaterial;
