@@ -4,7 +4,6 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
-
 import com.mycompany.project_alpabet_crud.component.BuyProductable;
 import com.mycompany.project_alpabet_crud.component.ProductListPanel;
 import com.mycompany.project_alpabet_crud.model.Product;
@@ -19,6 +18,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
@@ -26,13 +26,15 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author informatics
  */
-public class PosPanel extends javax.swing.JPanel implements BuyProductable{
+public class PosPanel extends javax.swing.JPanel implements BuyProductable {
+
     ArrayList<Product> products;
-    ProductService  productService = new ProductService();
+    ProductService productService = new ProductService();
     RecieptService receiptService = new RecieptService();
 
     Reciept receipt;
     private final ProductListPanel productListPanel;
+
     /**
      * Creates new form PosPanel
      */
@@ -40,7 +42,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
         initComponents();
         initProducttable();
         receipt = new Reciept();
-        
+
         tblreciept.setModel(new AbstractTableModel() {
             String[] header = {"Name", "Price", "Quantity", "Total"};
 
@@ -109,8 +111,9 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
 
     private void initProducttable() {
         products = productService.getProductsOrderByName();
-        tblProduct.setModel(new AbstractTableModel(){
-            String[] headers = {"Image","ID","Name","Price"};
+        tblProduct.setModel(new AbstractTableModel() {
+            String[] headers = {"Image", "ID", "Name", "Price"};
+
             @Override
             public int getRowCount() {
                 return products.size();
@@ -119,8 +122,10 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return switch (columnIndex) {
-                    case 0 -> ImageIcon.class;
-                    default -> String.class;
+                    case 0 ->
+                        ImageIcon.class;
+                    default ->
+                        String.class;
                 };
             }
 
@@ -137,13 +142,13 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 Product product = products.get(rowIndex);
-                switch(columnIndex){
+                switch (columnIndex) {
                     case 0:
-                        ImageIcon icon = new ImageIcon("./product"+ product.getId()+",png");
+                        ImageIcon icon = new ImageIcon("./productpic/product" + product.getId() + ",png");
                         Image image = icon.getImage();
                         int width = image.getWidth(null);
                         int height = image.getHeight(null);
-                        Image newImage = image.getScaledInstance((int)((100*width)/height), 100,Image.SCALE_SMOOTH);
+                        Image newImage = image.getScaledInstance((int) ((100 * width) / height), 100, Image.SCALE_SMOOTH);
                         icon.setImage(newImage);
                         return icon;
                     case 1:
@@ -173,7 +178,8 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
             }
 
             @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {                switch (columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                switch (columnIndex) {
                     case 2:
                         return true;
                     default:
@@ -182,10 +188,11 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
             }
         });
     }
-    private void refreshReciept(){
+
+    private void refreshReciept() {
         tblreciept.revalidate();
         tblreciept.repaint();
-        lbltotal.setText(""+receipt.getTotal());
+        lbltotal.setText("" + receipt.getTotal());
     }
 
     /**
@@ -211,6 +218,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
         jLabel3 = new javax.swing.JLabel();
         lblchange = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,32 +257,26 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Total :");
 
         lbltotal.setBackground(new java.awt.Color(255, 255, 255));
         lbltotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbltotal.setForeground(new java.awt.Color(0, 0, 0));
         lbltotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbltotal.setText("xxxxx");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Cash :");
 
         lblcash.setBackground(new java.awt.Color(255, 255, 255));
         lblcash.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblcash.setForeground(new java.awt.Color(0, 0, 0));
         lblcash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblcash.setText("xxxxx");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Change :");
 
         lblchange.setBackground(new java.awt.Color(255, 255, 255));
         lblchange.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblchange.setForeground(new java.awt.Color(0, 0, 0));
         lblchange.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblchange.setText("xxxxx");
 
@@ -310,7 +312,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblchange))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton2.setBackground(new java.awt.Color(51, 153, 0));
@@ -319,6 +321,13 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -331,18 +340,24 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(5, 5, 5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGap(5, 5, 5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -356,7 +371,9 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,17 +391,35 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    openDialog();      
-    
-    
+        openDialog();
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        int selectedIndex = tblreciept.getSelectedRow();
+        if (selectedIndex >= 0) {
+            RecieptDetail selectedReceiptDetail = receipt.getRecieptDetails().get(selectedIndex);
+            int input = JOptionPane.showConfirmDialog(this, "Do you want to proceed?", "Select an Option...", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (input == 0) {
+                receipt.delRecieptDetail(selectedReceiptDetail);
+                refreshReciept();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a receipt detail to delete.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
     public void clearReceipt() {
         receipt = new Reciept();
-        
+
         refreshReciept();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -402,15 +437,17 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable{
     // End of variables declaration//GEN-END:variables
     private void openDialog() {
         JFrame frame = (JFrame) SwingUtilities.getRoot(this);
-        PaymentDialog paymentDialog = new PaymentDialog((frame),true);
+        PaymentDialog paymentDialog = new PaymentDialog((frame), true);
         paymentDialog.setLocationRelativeTo(this);
         paymentDialog.setVisible(true);
-        paymentDialog.addWindowListener(new WindowAdapter(){});
-        
+        paymentDialog.addWindowListener(new WindowAdapter() {
+        });
+
     }
+
     @Override
     public void buy(Product product, int qty) {
-        receipt.addRecieptDetail(product,qty);
+        receipt.addRecieptDetail(product, qty);
         refreshReciept();
     }
 }

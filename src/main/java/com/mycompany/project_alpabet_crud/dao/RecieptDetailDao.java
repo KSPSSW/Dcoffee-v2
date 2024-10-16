@@ -23,7 +23,7 @@ public class RecieptDetailDao implements Dao<RecieptDetail> {
     @Override
     public RecieptDetail get(int id) {
         RecieptDetail recieptDetail = null;
-        String sql = "SELECT * FROM receiptDetail WHERE recieptDetail_id=?";
+        String sql = "SELECT * FROM receiptDetail WHERE reciept_detail_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
