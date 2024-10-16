@@ -22,7 +22,7 @@ public class RecieptService {
     
     public List<Reciept> getReciepts(){
         RecieptDao recieptDao = new RecieptDao();
-        return recieptDao.getAll(" reciept_id asc");
+        return recieptDao.getAll(" receipt_id asc");
     }
 
     public Reciept addNew(Reciept editedReciept) {

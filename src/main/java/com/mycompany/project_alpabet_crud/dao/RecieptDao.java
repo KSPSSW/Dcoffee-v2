@@ -24,7 +24,7 @@ public class RecieptDao implements Dao<Reciept> {
     @Override
     public Reciept get(int id) {
         Reciept reciept = null;
-        String sql = "SELECT * FROM reciept WHERE reciept_id=?";
+        String sql = "SELECT * FROM receipt WHERE receipt_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class RecieptDao implements Dao<Reciept> {
             while (rs.next()) {
                 reciept = Reciept.fromRS(rs);
                 RecieptDetailDao rdd = new RecieptDetailDao();
-                ArrayList<RecieptDetail> recieptDetails = (ArrayList<RecieptDetail>) rdd.getAll("reciept_id="+reciept.getId(), " reciept_detail_id ");
+                ArrayList<RecieptDetail> recieptDetails = (ArrayList<RecieptDetail>) rdd.getAll("receipt_id="+reciept.getId(), " receipt_detail_id ");
                 reciept.setRecieptDetails(recieptDetails);
                 
                 
@@ -48,7 +48,7 @@ public class RecieptDao implements Dao<Reciept> {
 
     public List<Reciept> getAll() {
         ArrayList<Reciept> list = new ArrayList();
-        String sql = "SELECT * FROM reciept";
+        String sql = "SELECT * FROM receipt";
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
@@ -69,7 +69,7 @@ public class RecieptDao implements Dao<Reciept> {
     @Override
     public List<Reciept> getAll(String where, String order) {
         ArrayList<Reciept> list = new ArrayList();
-        String sql = "SELECT * FROM reciept where " + where + " ORDER BY" + order;
+        String sql = "SELECT * FROM receipt where " + where + " ORDER BY " + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
@@ -90,7 +90,7 @@ public class RecieptDao implements Dao<Reciept> {
 
     public List<Reciept> getAll(String order) {
         ArrayList<Reciept> list = new ArrayList();
-        String sql = "SELECT * FROM reciept  ORDER BY" + order;
+        String sql = "SELECT * FROM receipt  ORDER BY " + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
@@ -111,7 +111,7 @@ public class RecieptDao implements Dao<Reciept> {
     @Override
     public Reciept save(Reciept obj) {
 
-        String sql = "INSERT INTO reciept (total,cash,total_qty,user_id,customer_id)"
+        String sql = "INSERT INTO receipt (total,cash,total_quantity,user_id,customer_id)"
                 + "VALUES(?, ?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
@@ -134,9 +134,9 @@ public class RecieptDao implements Dao<Reciept> {
 
     @Override
     public Reciept update(Reciept obj) {
-        String sql = "UPDATE reciept"
-                + " SET total = ?, cash = ?, total_qty = ?, user_id = ?, customer_id = ?"
-                + " WHERE reciept_id = ?";
+        String sql = "UPDATE receipt"
+                + " SET total = ?, cash = ?, total_quantity = ?, user_id = ?, customer_id = ?"
+                + " WHERE receipt_id = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -158,7 +158,7 @@ public class RecieptDao implements Dao<Reciept> {
 
     @Override
     public int delete(Reciept obj) {
-        String sql = "DELETE FROM reciept WHERE reciept_id=?";
+        String sql = "DELETE FROM receipt WHERE receipt_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);

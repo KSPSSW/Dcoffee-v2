@@ -4,25 +4,45 @@
  */
 package com.mycompany.project_alpabet_crud.component;
 
-import java.awt.GridBagLayout;
+
+import com.mycompany.project_alpabet_crud.model.Product;
+import com.mycompany.project_alpabet_crud.service.ProductService;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 /**
  *
  * @author thana
  */
-public class ProductListPanel extends javax.swing.JPanel {
+public class ProductListPanel extends javax.swing.JPanel implements BuyProductable {
+
+    private final ProductService productService;
+    private final ArrayList<Product> products;
+    private ArrayList<BuyProductable> subscribers = new ArrayList<>();
 
     /**
      * Creates new form ProductListPanel
      */
     public ProductListPanel() {
         initComponents();
-        for (int i = 0; i < 20; i++) {
-            pnlProductlist.add(new ProductItemPanel());
+        productService = new ProductService();
+        products = productService.getProductsOrderByName();
+        int ProductSize = products.size();
+        System.out.println(products);
+        System.out.println(products.size());
+
+        for (Product p : products) {
+            ProductItemPanel pnlProductItem = new ProductItemPanel(p);
+            pnlProductItem.addOnByProduct(this);
+            pnlProductlist.add(pnlProductItem);
 
         }
-        pnlProductlist.setLayout(new GridLayout(7,2,0,0));
+        pnlProductlist.setLayout(new GridLayout((ProductSize / 3) + ((ProductSize % 3 != 0) ? 1 : 0), 3, 0, 0));
+    }
+
+    public void addOnByProduct(BuyProductable subscriber) {
+        subscribers.add(subscriber);
+
     }
 
     /**
@@ -60,7 +80,7 @@ public class ProductListPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -69,4 +89,12 @@ public class ProductListPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlProductlist;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void buy(Product product, int qty) {
+        System.out.println(product.getName() + " " + qty);
+        for (BuyProductable s : subscribers){
+            s.buy(product, qty);
+        }
+    }
 }
