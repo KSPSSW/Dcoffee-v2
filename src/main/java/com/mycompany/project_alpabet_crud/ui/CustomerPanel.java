@@ -6,8 +6,14 @@ package com.mycompany.project_alpabet_crud.ui;
 
 import com.mycompany.project_alpabet_crud.model.Customer;
 import com.mycompany.project_alpabet_crud.service.CustomerService;
+import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -26,7 +32,7 @@ public class CustomerPanel extends javax.swing.JPanel {
     public CustomerPanel() {
         initComponents();
         csService = new CustomerService();
-
+        tblCustomer.setRowHeight(100);
         list = csService.getCustomers();
 //        System.out.println(list);
         tblCustomer.setModel(new AbstractTableModel() {
@@ -48,14 +54,32 @@ public class CustomerPanel extends javax.swing.JPanel {
             }
 
             @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                switch(columnIndex){
+                    case 0:
+                        return ImageIcon.class;
+                    default:
+                        return String.class;
+                }            }
+            
+
+            @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 Customer user = list.get(rowIndex);
                 switch (columnIndex) {
                     case 0:
-                        return user.getId();
+                        ImageIcon icon = new ImageIcon("./customer" +user.getId() +".png");
+                        Image image = icon.getImage();
+                        int width = image.getWidth(null);
+                        int height = image.getHeight(null);
+                        Image newImage = image.getScaledInstance((int) (100*((float)width)/height), 100, Image.SCALE_SMOOTH);
+                        icon.setImage(newImage);
+                        return icon;
                     case 1:
-                        return user.getName();
+                        return user.getId();
                     case 2:
+                        return user.getName();
+                    case 3:
                         return user.getTel();
                     default:
                         return "unknown";
@@ -63,8 +87,6 @@ public class CustomerPanel extends javax.swing.JPanel {
 
             }
         });
-
-        enableForm(false);
     }
 
     /**
@@ -76,106 +98,12 @@ public class CustomerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        edtName = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        edtTel = new javax.swing.JTextField();
-        btnSave = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCustomer = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-
-        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
-
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("ID : ");
-
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("________");
-
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Customer_Name:");
-
-        edtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtNameActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Customer_Tel:");
-
-        edtTel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                edtTelActionPerformed(evt);
-            }
-        });
-
-        btnSave.setText("save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
-        btnClear.setText("clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClear)
-                        .addGap(15, 15, 15))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtName, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(edtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(251, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnClear)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(edtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(edtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
 
         tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,17 +173,14 @@ public class CustomerPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -267,35 +192,9 @@ public class CustomerPanel extends javax.swing.JPanel {
         int selectedIndex = tblCustomer.getSelectedRow();
         if (selectedIndex >= 0) {
             editCustomer = list.get(selectedIndex);
-            setObjectToForm();
-            enableForm(true);
+            openDialog();
         }
     }//GEN-LAST:event_btnEditActionPerformed
-
-    private void edtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtTelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtTelActionPerformed
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-        enableForm(false);
-        editCustomer = null;
-    }//GEN-LAST:event_btnClearActionPerformed
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        if (editCustomer.getId() < 0) { //add new
-            setFormToObject();
-            enableForm(false);
-            csService.addNew(editCustomer);
-            refreshTable();
-        } else {
-            setFormToObject();
-            enableForm(false);
-            csService.update(editCustomer);
-            refreshTable();
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
@@ -313,13 +212,22 @@ public class CustomerPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         editCustomer = new Customer();
-        setObjectToForm();
-        enableForm(true);
+        openDialog();
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void edtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_edtNameActionPerformed
+    private void openDialog() {
+        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
+        CustomerDialog customerdialog = new CustomerDialog(frame, editCustomer);
+        customerdialog.setLocationRelativeTo(this);
+        customerdialog.setVisible(true);
+        customerdialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshTable();
+            }
+
+        });
+    }
 
     private void refreshTable() {
         list = csService.getCustomers();
@@ -327,44 +235,12 @@ public class CustomerPanel extends javax.swing.JPanel {
         tblCustomer.repaint();
     }
 
-    private void setFormToObject() {
-        // TODO add your handling code here:
-        editCustomer.setName(edtName.getText());
-        editCustomer.setTel(edtTel.getText());
-    }
 
-    private void enableForm(boolean status) {
-        if (status == false) {
-            edtName.setText("");
-            edtTel.setText("");
-        }
-
-        edtName.setEnabled(status);
-        btnSave.setEnabled(status);
-        btnClear.setEnabled(status);
-        edtTel.setEnabled(status);
-        edtName.requestFocus();
-    }
-
-    private void setObjectToForm() {
-        //        set obj to form
-        edtName.setText(editCustomer.getName());
-        edtTel.setText(editCustomer.getTel());
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JTextField edtName;
-    private javax.swing.JTextField edtTel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCustomer;
