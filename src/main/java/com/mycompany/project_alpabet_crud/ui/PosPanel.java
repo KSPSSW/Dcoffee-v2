@@ -16,6 +16,7 @@ import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,7 +32,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
     ArrayList<Product> products;
     ProductService productService = new ProductService();
     RecieptService receiptService = new RecieptService();
-
+    
     Reciept receipt;
     private final ProductListPanel productListPanel;
 
@@ -262,7 +263,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         lbltotal.setBackground(new java.awt.Color(255, 255, 255));
         lbltotal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbltotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbltotal.setText("xxxxx");
+        lbltotal.setText("00.0");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Cash :");
@@ -270,7 +271,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         lblcash.setBackground(new java.awt.Color(255, 255, 255));
         lblcash.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblcash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblcash.setText("xxxxx");
+        lblcash.setText("00.0");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Change :");
@@ -278,7 +279,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         lblchange.setBackground(new java.awt.Color(255, 255, 255));
         lblchange.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblchange.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblchange.setText("xxxxx");
+        lblchange.setText("00.0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -300,7 +301,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbltotal)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -388,10 +389,12 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         receipt.setUser(UserService.getCurrentUser());
         receiptService.addNew(receipt);
         clearReceipt();
+        clearText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         openDialog();
+        
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -437,17 +440,30 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
     // End of variables declaration//GEN-END:variables
     private void openDialog() {
         JFrame frame = (JFrame) SwingUtilities.getRoot(this);
-        PaymentDialog paymentDialog = new PaymentDialog((frame), true);
+        CashDialog paymentDialog = new CashDialog((frame), true);
         paymentDialog.setLocationRelativeTo(this);
         paymentDialog.setVisible(true);
         paymentDialog.addWindowListener(new WindowAdapter() {
         });
+        Addcash(paymentDialog);
+        lblchange.setText(""+(receipt.getCash()-receipt.getTotal()));
+    }
 
+    private void Addcash(CashDialog paymentDialog) {
+        float cash = paymentDialog.resultNumber;
+        receipt.setCash(cash);
+        lblcash.setText(""+cash);
     }
 
     @Override
     public void buy(Product product, int qty) {
         receipt.addRecieptDetail(product, qty);
         refreshReciept();
+    }
+
+    private void clearText() {
+        lblcash.setText("00.0");
+        lblchange.setText("00.0");
+        lbltotal.setText("00.0");
     }
 }

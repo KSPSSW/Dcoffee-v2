@@ -10,17 +10,18 @@ import java.util.ArrayList;
  *
  * @author thana
  */
-public class PaymentDialog extends javax.swing.JDialog {
+public class CashDialog extends javax.swing.JDialog {
 
-    StringBuilder resultString = new StringBuilder();
-    int resultInt;
+    StringBuilder result = new StringBuilder();
+    float resultNumber;
 
     /**
      * Creates new form PaymentDialog
      */
-    public PaymentDialog(java.awt.Frame parent, boolean modal) {
+    public CashDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setResizable(false);
 
     }
 
@@ -66,6 +67,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         lblcalculator.setBackground(new java.awt.Color(153, 255, 153));
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         lblnum.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblnum.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,6 +92,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl8.setBackground(new java.awt.Color(102, 204, 255));
+        pnl8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl8MouseClicked(evt);
@@ -118,6 +121,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl7.setBackground(new java.awt.Color(102, 204, 255));
+        pnl7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl7MouseClicked(evt);
@@ -146,6 +150,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl9.setBackground(new java.awt.Color(102, 204, 255));
+        pnl9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl9MouseClicked(evt);
@@ -174,6 +179,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl4.setBackground(new java.awt.Color(102, 204, 255));
+        pnl4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl4MouseClicked(evt);
@@ -202,6 +208,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl5.setBackground(new java.awt.Color(102, 204, 255));
+        pnl5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl5MouseClicked(evt);
@@ -230,6 +237,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl6.setBackground(new java.awt.Color(102, 204, 255));
+        pnl6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl6MouseClicked(evt);
@@ -258,6 +266,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl1.setBackground(new java.awt.Color(102, 204, 255));
+        pnl1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl1MouseClicked(evt);
@@ -286,6 +295,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl2.setBackground(new java.awt.Color(102, 204, 255));
+        pnl2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl2MouseClicked(evt);
@@ -314,6 +324,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl3.setBackground(new java.awt.Color(102, 204, 255));
+        pnl3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl3MouseClicked(evt);
@@ -342,6 +353,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnl0.setBackground(new java.awt.Color(102, 204, 255));
+        pnl0.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnl0.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnl0MouseClicked(evt);
@@ -370,6 +382,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         pnlaccept.setBackground(new java.awt.Color(51, 204, 0));
+        pnlaccept.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlaccept.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlacceptMouseClicked(evt);
@@ -388,6 +401,7 @@ public class PaymentDialog extends javax.swing.JDialog {
         );
 
         lbldellete.setBackground(new java.awt.Color(255, 0, 102));
+        lbldellete.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lbldellete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbldelleteMouseClicked(evt);
@@ -402,16 +416,16 @@ public class PaymentDialog extends javax.swing.JDialog {
         lbldelleteLayout.setHorizontalGroup(
             lbldelleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lbldelleteLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel11)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         lbldelleteLayout.setVerticalGroup(
             lbldelleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbldelleteLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+            .addGroup(lbldelleteLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addComponent(jLabel11)
-                .addGap(30, 30, 30))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -517,64 +531,72 @@ public class PaymentDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pnl0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl0MouseClicked
-        resultString.append(0);
+        result.append(0);
         loadNumber();
     }//GEN-LAST:event_pnl0MouseClicked
 
     private void pnl3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl3MouseClicked
-        resultString.append(3);
+        result.append(3);
         loadNumber();
     }//GEN-LAST:event_pnl3MouseClicked
 
     private void pnl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl2MouseClicked
-        resultString.append(2);
+        result.append(2);
         loadNumber();
     }//GEN-LAST:event_pnl2MouseClicked
 
     private void pnl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl1MouseClicked
-        resultString.append(1);
+        result.append(1);
         loadNumber();
     }//GEN-LAST:event_pnl1MouseClicked
 
     private void pnl4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl4MouseClicked
-        resultString.append(4);
+        result.append(4);
         loadNumber();
     }//GEN-LAST:event_pnl4MouseClicked
 
     private void pnl5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl5MouseClicked
-        resultString.append(5);
+        result.append(5);
         loadNumber();
     }//GEN-LAST:event_pnl5MouseClicked
 
     private void pnl6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl6MouseClicked
-        resultString.append(6);
+        result.append(6);
         loadNumber();
     }//GEN-LAST:event_pnl6MouseClicked
 
     private void pnl7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl7MouseClicked
-        resultString.append(7);
+        result.append(7);
         loadNumber();
     }//GEN-LAST:event_pnl7MouseClicked
 
     private void pnl8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl8MouseClicked
-        resultString.append(8);
+        result.append(8);
         loadNumber();
     }//GEN-LAST:event_pnl8MouseClicked
 
     private void pnl9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl9MouseClicked
-        resultString.append(9);
+        result.append(9);
         loadNumber();
     }//GEN-LAST:event_pnl9MouseClicked
 
     private void lbldelleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbldelleteMouseClicked
-       resultString.deleteCharAt(resultString.length() - 1);
-       loadNumber();
+        if (result.length() > 0) {
+            result.deleteCharAt(result.length() - 1);
+
+        }
+        if (result.length() == 0) {
+            lblnum.setText("0");
+            
+        }
+
+        loadNumber();
     }//GEN-LAST:event_lbldelleteMouseClicked
 
     private void pnlacceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlacceptMouseClicked
+        dispose();
         
-        lblnum.setText("0");
-        
+
     }//GEN-LAST:event_pnlacceptMouseClicked
 
     /**
@@ -594,15 +616,10 @@ public class PaymentDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel lblcalculator;
     private javax.swing.JPanel lbldellete;
     private javax.swing.JLabel lblnum;
-    private javax.swing.JPanel n1panel10;
-    private javax.swing.JPanel n1panel2;
     private javax.swing.JPanel pnl0;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;
@@ -618,11 +635,11 @@ public class PaymentDialog extends javax.swing.JDialog {
 
     private void loadNumber() {
         //cover String to int 
-         Integer numberObject = Integer.valueOf(resultString.toString());
-         resultInt = numberObject;
-        lblnum.setText(""+resultInt);
-        
-        
+        if (result.length() > 0) {
+            Integer numberObject = Integer.valueOf(result.toString());
+            resultNumber = numberObject;
+            lblnum.setText("" + resultNumber);
+        }
 
     }
 }
