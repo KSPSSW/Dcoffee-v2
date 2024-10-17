@@ -124,6 +124,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnPlus.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         btnPlus.setText("+");
         btnPlus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +132,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
             }
         });
 
+        btnMinus.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         btnMinus.setText("-");
         btnMinus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +140,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
             }
         });
 
+        txtQty.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         txtQty.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtQty.setText("1");
 
