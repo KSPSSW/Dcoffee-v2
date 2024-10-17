@@ -167,6 +167,11 @@ public class ProductItemPanel extends javax.swing.JPanel {
 
         lblIcon.setBackground(new java.awt.Color(255, 255, 255));
         lblIcon.setOpaque(true);
+        lblIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIconMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,6 +210,10 @@ public class ProductItemPanel extends javax.swing.JPanel {
         }
         txtQty.setText("" + newQty);
     }//GEN-LAST:event_btnMinusActionPerformed
+
+    private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
+
+    }//GEN-LAST:event_lblIconMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
