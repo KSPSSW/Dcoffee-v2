@@ -50,12 +50,14 @@ public class Mainframe extends javax.swing.JFrame {
         DefaultColor = new Color(255, 255, 255);
         ClickColor = new Color(200, 162, 127);
         setLogoImage("logo", 113, 113, lblLogo);
+        setLogoImage("logoMain", 56, 56, lblMain);
         setLogoImage("logoPos", 56, 56, lblPos);
         setLogoImage("logoCus", 56, 56, lblCustomer);
         setLogoImage("logoProduct", 56, 56, lblProduct);
         setLogoImage("logoStock", 56, 56, lblStock);
         setLogoImage("logoMat", 56, 56, lblMaterial);
         setLogoImage("logoUser", 56, 56, lblUser);
+        setLogoImage("logoLogout", 56, 56, lblOut);
 
     }
 

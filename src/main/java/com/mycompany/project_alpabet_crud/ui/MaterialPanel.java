@@ -50,7 +50,7 @@ public class MaterialPanel extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(200, 162, 127));
 
         jButton6.setText("Import Material");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +76,7 @@ public class MaterialPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(200, 162, 127));
 
         jLabel1.setText("Shop :");
 
@@ -91,7 +91,6 @@ public class MaterialPanel extends javax.swing.JPanel {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("2024/10/01 Employee A");
 
         jLabel4.setText("Quantity :");
@@ -170,7 +169,7 @@ public class MaterialPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(200, 162, 127));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,7 +199,7 @@ public class MaterialPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jPanel7.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel7.setBackground(new java.awt.Color(200, 162, 127));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
