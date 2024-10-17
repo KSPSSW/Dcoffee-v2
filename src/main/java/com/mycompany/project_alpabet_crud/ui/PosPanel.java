@@ -9,6 +9,7 @@ import com.mycompany.project_alpabet_crud.component.ProductListPanel;
 import com.mycompany.project_alpabet_crud.model.Product;
 import com.mycompany.project_alpabet_crud.model.Reciept;
 import com.mycompany.project_alpabet_crud.model.RecieptDetail;
+import com.mycompany.project_alpabet_crud.model.User;
 import com.mycompany.project_alpabet_crud.service.ProductService;
 import com.mycompany.project_alpabet_crud.service.RecieptService;
 import com.mycompany.project_alpabet_crud.service.UserService;
@@ -16,6 +17,7 @@ import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -35,6 +37,8 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
     
     Reciept receipt;
     private final ProductListPanel productListPanel;
+    private List<Reciept> list;
+    private Reciept editedReciept;
 
     /**
      * Creates new form PosPanel
@@ -394,9 +398,6 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         openDialog();
-        
-
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -457,9 +458,21 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
     @Override
     public void buy(Product product, int qty) {
-        receipt.addRecieptDetail(product, qty);
-        refreshReciept();
+    ArrayList<RecieptDetail> receiptDetails = receipt.getRecieptDetails();
+    boolean productExists = false;
+    
+    for (RecieptDetail detail : receiptDetails) {
+        if (detail.getProductId() == product.getId()) {
+            detail.setQty(detail.getQty() + qty);
+            productExists = true;
+            break;
+        }
     }
+    if (!productExists) {
+        receipt.addRecieptDetail(product, qty);
+    }
+    refreshReciept(); 
+}
 
     private void clearText() {
         lblcash.setText("00.0");
