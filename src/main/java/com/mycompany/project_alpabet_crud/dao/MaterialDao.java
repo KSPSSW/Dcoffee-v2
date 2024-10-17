@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class MaterialDao implements Dao<Material> {
 
-    @Override
+        @Override
     public Material get(int id) {
         Material material = null;
         String sql = "SELECT * FROM material WHERE material_id=?";
@@ -39,7 +39,26 @@ public class MaterialDao implements Dao<Material> {
         }
         return material;
     }
+    
+    public Material getByUserImport(String user) {
+        Material material = null;
+        String sql = "SELECT * FROM material WHERE material_user_import=?";
+        Connection conn = DatabaseHelper.getConnect();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, user);
+            ResultSet rs = stmt.executeQuery();
 
+            while (rs.next()) {
+                material = Material.fromRS(rs);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return material;
+    }
+    
     public Material getByName(String name) {
         Material material = null;
         String sql = "SELECT * FROM material WHERE material_name=?";
@@ -61,7 +80,7 @@ public class MaterialDao implements Dao<Material> {
 
     public List<Material> getAll() {
         ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material";
+        String sql = "SELECT * FROM material ";
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
@@ -82,7 +101,7 @@ public class MaterialDao implements Dao<Material> {
     @Override
     public List<Material> getAll(String where, String order) {
         ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material where " + where + " ORDER BY" + order;
+        String sql = " SELECT * FROM material where " + where + " ORDER BY " + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
@@ -103,7 +122,7 @@ public class MaterialDao implements Dao<Material> {
 
     public List<Material> getAll(String order) {
         ArrayList<Material> list = new ArrayList();
-        String sql = "SELECT * FROM material  ORDER BY" + order;
+        String sql = "SELECT * FROM material  ORDER BY " + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
@@ -124,14 +143,17 @@ public class MaterialDao implements Dao<Material> {
     @Override
     public Material save(Material obj) {
 
-        String sql = "INSERT INTO material (material_name, material_qty, material_price)"
-                + "VALUES(?, ?, ?)";
+        String sql = "INSERT INTO material (material_name, material_qty, material_total_price,material_user_import,material_price_perunit,material_shop_import)"
+                + "VALUES(?, ?, ?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, obj.getName());
             stmt.setInt(2, obj.getQty());
-            stmt.setInt(3,obj.getPrice());
+            stmt.setInt(3,obj.getTotalPrice());
+            stmt.setString(4, obj.getUser());
+            stmt.setInt(5,obj.getPricePerUnit());
+            stmt.setString(6,obj.getShop());
             
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
@@ -153,7 +175,7 @@ public class MaterialDao implements Dao<Material> {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, obj.getName());
             stmt.setInt(2, obj.getQty());
-            stmt.setInt(3,obj.getPrice());
+            stmt.setInt(3,obj.getTotalPrice());
 //            System.out.println(stmt);
             int ret = stmt.executeUpdate();
             System.out.println(ret);
@@ -178,5 +200,4 @@ public class MaterialDao implements Dao<Material> {
         }
         return -1;        
     }
-
 }
