@@ -22,7 +22,6 @@ public class Material {
             material.setName(rs.getString("material_name"));
             material.setQty(rs.getInt("material_qty"));
             material.setTotalPrice(rs.getInt("material_total_price"));
-            material.setUser(rs.getString("material_user_import"));
             material.setPricePerUnit(rs.getInt("material_price_perunit"));
             material.setShop(rs.getString("material_shop_import"));
         } catch(SQLException ex){
@@ -35,7 +34,6 @@ public class Material {
     private String name;
     private int qty;
     private int totalprice;
-    private String user;
     private int priceperunit;
     private String matshopimport;
 
@@ -48,14 +46,13 @@ public class Material {
         this.matshopimport = matshopimport;
     }
 
-    public Material(String name, int qty, int totalprice ,int priceperunit, String matshopimport, String user) {
+    public Material(String name, int qty, int totalprice ,int priceperunit, String matshopimport) {
         this.id = -1;
         this.name = name;
         this.qty = qty;
         this.totalprice = totalprice;
         this.priceperunit=priceperunit;
         this.matshopimport=matshopimport;
-        this.user =user;
     }
 
     public Material() {
@@ -65,7 +62,6 @@ public class Material {
         this.totalprice = 0;
         this.priceperunit=0;
         this.matshopimport="";
-        this.user="";
     }
 
     public int getId() {
@@ -99,14 +95,6 @@ public class Material {
     public void setTotalPrice(int price) {
         this.totalprice = price;
     }
-    
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
 
     public int getPricePerUnit() {
         return priceperunit;
@@ -119,13 +107,14 @@ public class Material {
         return matshopimport;
     }
 
-    @Override
-    public String toString() {
-        return "Material{" + "id=" + id + ", name=" + name + ", qty=" + qty + ", totalprice=" + totalprice + ", user=" + user + ", priceperunit=" + priceperunit + ", matshopimport=" + matshopimport + '}';
-    }
-
     public void setShop(String matshopimport) {
         this.matshopimport = matshopimport;
     }
+
+    @Override
+    public String toString() {
+        return "Material{" + "id=" + id + ", name=" + name + ", qty=" + qty + ", totalprice=" + totalprice + ", priceperunit=" + priceperunit + ", matshopimport=" + matshopimport + '}';
+    }
+    
 }
 
