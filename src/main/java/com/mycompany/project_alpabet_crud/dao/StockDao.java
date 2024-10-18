@@ -23,7 +23,7 @@ public class StockDao implements Dao<Stock>{
     @Override
     public Stock get(int id) {
         Stock stock = null;
-        String sql = "SELECT * FROM stock WHERE stock_id";
+        String sql = "SELECT * FROM stock WHERE stock_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class StockDao implements Dao<Stock>{
 
     public Stock getByName(String name) {
         Stock stock = null;
-        String sql = "SELECT * FROM customer WHERE stock_name=?";
+        String sql = "SELECT * FROM stock WHERE mat_name=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -124,12 +124,12 @@ public class StockDao implements Dao<Stock>{
 
     @Override
     public Stock save(Stock obj) {
-        String sql = "INSERT INTO stock (stock_name, stock_total, stock_amount)"
+        String sql = "INSERT INTO stock (mat_name, stock_total, stock_amount)"
                 + "VALUES(?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getName()); 
+            stmt.setString(1, obj.getMatName()); 
             stmt.setInt(2, obj.getTotal());
             stmt.setInt(3, obj.getAmount());
 
@@ -146,12 +146,12 @@ public class StockDao implements Dao<Stock>{
     @Override
     public Stock update(Stock obj) {
         String sql = "UPDATE stock"
-                + " SET stock_name = ?, stock_total = ?, stock_amount = ?"
+                + " SET mat_name = ?, stock_total = ?, stock_amount = ?"
                 + " WHERE stock_id = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getName()); 
+            stmt.setString(1, obj.getMatName()); 
             stmt.setInt(2, obj.getTotal());
             stmt.setInt(3, obj.getAmount());
 //            System.out.println(stmt);
