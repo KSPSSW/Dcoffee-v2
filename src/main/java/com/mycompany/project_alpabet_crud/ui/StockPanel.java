@@ -45,7 +45,7 @@ public class StockPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1055, 600));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(231, 212, 187));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,7 +102,7 @@ public class StockPanel extends javax.swing.JPanel {
                 .addGap(22, 22, 22))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel4.setBackground(new java.awt.Color(231, 212, 187));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

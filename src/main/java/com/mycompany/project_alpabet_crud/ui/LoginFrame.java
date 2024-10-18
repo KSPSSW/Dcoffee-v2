@@ -23,7 +23,7 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
-
+        setResizable(false);
         setImage("logo", 160, 160, lblLogo);
         setImage("backgroundLogin", 2000, 750, lblBackground);
         setImage("userlogo", 65, 65, lblUserLogo);
@@ -169,10 +169,10 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(37, 37, 37))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 430, 560));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 30, 430, 560));
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 630));
 
-        setSize(new java.awt.Dimension(1040, 652));
+        setSize(new java.awt.Dimension(1056, 652));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

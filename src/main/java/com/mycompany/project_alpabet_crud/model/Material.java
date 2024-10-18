@@ -6,7 +6,6 @@ package com.mycompany.project_alpabet_crud.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,33 +15,57 @@ import java.util.logging.Logger;
  */
 public class Material {
 
-    public static Material fromRS(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     public static Material fromRS(ResultSet rs) {
+        Material material = new Material();
+        try {
+            material.setId(rs.getInt("material_id"));
+            material.setName(rs.getString("material_name"));
+            material.setQty(rs.getInt("material_qty"));
+            material.setTotalPrice(rs.getInt("material_total_price"));
+            material.setUser(rs.getString("material_user_import"));
+            material.setPricePerUnit(rs.getInt("material_price_perunit"));
+            material.setShop(rs.getString("material_shop_import"));
+        } catch(SQLException ex){
+            Logger.getLogger(Material.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return material;
     }
     private int id;
     private String name;
     private int qty;
-    private int price;
+    private int totalprice;
+    private String user;
+    private int priceperunit;
+    private String matshopimport;
 
-    public Material(int id, String name, int qty, int price) {
+    public Material(int id, String name, int qty, int totalprice, int priceperunit, String matshopimport) {
         this.id = id;
         this.name = name;
         this.qty = qty;
-        this.price = price;
+        this.totalprice = totalprice;
+        this.priceperunit = priceperunit;
+        this.matshopimport = matshopimport;
     }
 
-    public Material(String name, int qty, int price) {
+    public Material(String name, int qty, int totalprice ,int priceperunit, String matshopimport, String user) {
         this.id = -1;
         this.name = name;
         this.qty = qty;
-        this.price = price;
+        this.totalprice = totalprice;
+        this.priceperunit=priceperunit;
+        this.matshopimport=matshopimport;
+        this.user =user;
     }
 
     public Material() {
         this.id = -1;
         this.name = "";
-       this.qty = 0;
-        this.price = 0;
+        this.qty = 0;
+        this.totalprice = 0;
+        this.priceperunit=0;
+        this.matshopimport="";
+        this.user="";
     }
 
     public int getId() {
@@ -69,32 +92,40 @@ public class Material {
         this.qty = qty;
     }
 
-    public int getPrice() {
-        return price;
+    public int getTotalPrice() {
+        return totalprice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setTotalPrice(int price) {
+        this.totalprice = price;
+    }
+    
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public int getPricePerUnit() {
+        return priceperunit;
+    }
+
+    public void setPricePerUnit(int priceperunit) {
+        this.priceperunit = priceperunit;
+    }
+    public String getShop() {
+        return matshopimport;
     }
 
     @Override
     public String toString() {
-        return "Material{" + "id=" + id + ", name=" + name + ", qty=" + qty + ", price=" + price + '}';
+        return "Material{" + "id=" + id + ", name=" + name + ", qty=" + qty + ", totalprice=" + totalprice + ", user=" + user + ", priceperunit=" + priceperunit + ", matshopimport=" + matshopimport + '}';
     }
 
-    
-    public static Material fromRs(ResultSet rs){
-        Material material = new Material();
-        try {
-            material.setId(rs.getInt("material_id"));
-            material.setName(rs.getString("material_name"));
-            material.setQty(rs.getInt("material_qty"));
-            material.setPrice(rs.getInt("material_price"));
-        } catch(SQLException ex){
-            Logger.getLogger(Material.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-        return material;
+    public void setShop(String matshopimport) {
+        this.matshopimport = matshopimport;
     }
 }
 

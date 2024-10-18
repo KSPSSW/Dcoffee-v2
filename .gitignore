@@ -199,4 +199,8 @@ README.html
 *.iml
 .idea
 .exercism
+<<<<<<< HEAD
 *.db
+=======
+*.db
+>>>>>>> c0adee4d3885740c502ae522f92f719cc6c829ea

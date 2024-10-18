@@ -36,7 +36,7 @@ public class UserPanel extends javax.swing.JPanel {
         list = userService.getUsers();
         tblUser.setRowHeight(100);
         tblUser.setModel(new AbstractTableModel() {
-            String[] columnNames = {"ID", "Login", "Name", "Password", "Gender", "Role"};
+            String[] columnNames = {"Image", "ID", "Login", "Name", "Password", "Gender", "Role"};
             @Override
             public String getColumnName(int column) {
                 return columnNames[column];
@@ -49,7 +49,7 @@ public class UserPanel extends javax.swing.JPanel {
 
             @Override
             public int getColumnCount() {
-                return 6;
+                return 7;
             }
 
             @Override
@@ -110,7 +110,9 @@ public class UserPanel extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
-        tblUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        setBackground(new java.awt.Color(231, 212, 187));
+
+        tblUser.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -124,10 +126,10 @@ public class UserPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblUser);
 
-        jPanel2.setBackground(new java.awt.Color(200, 162, 127));
+        jPanel2.setBackground(new java.awt.Color(231, 212, 187));
 
-        btnAdd.setBackground(new java.awt.Color(204, 255, 204));
-        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnAdd.setBackground(new java.awt.Color(153, 255, 153));
+        btnAdd.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,8 +137,8 @@ public class UserPanel extends javax.swing.JPanel {
             }
         });
 
-        btnEdit.setBackground(new java.awt.Color(255, 255, 204));
-        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnEdit.setBackground(new java.awt.Color(255, 255, 153));
+        btnEdit.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,8 +146,8 @@ public class UserPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDelete.setBackground(new java.awt.Color(255, 204, 204));
-        btnDelete.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnDelete.setBackground(new java.awt.Color(255, 153, 153));
+        btnDelete.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,12 +161,12 @@ public class UserPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAdd)
-                .addGap(12, 12, 12)
-                .addComponent(btnEdit)
-                .addGap(18, 18, 18)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(443, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +189,7 @@ public class UserPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
