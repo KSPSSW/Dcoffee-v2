@@ -14,6 +14,11 @@ import java.util.List;
  */
 public class StockService {
     
+    public Stock getById(int id){
+        StockDao stockDao = new StockDao();
+        return stockDao.get(id);
+    }
+    
     public Stock getByName(String Name) {
         StockDao stockDao = new StockDao();
         Stock stock = stockDao.getByName(Name);

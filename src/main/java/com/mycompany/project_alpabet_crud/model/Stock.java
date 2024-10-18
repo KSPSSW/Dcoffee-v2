@@ -6,6 +6,7 @@ package com.mycompany.project_alpabet_crud.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,29 +16,32 @@ import java.util.logging.Logger;
  */
 public class Stock {
     private int id;
-    private String name;
+    private String matName;
     private int total;
     private int amount;
+    private Date date;
 
-    public Stock(int id, String name, int total, int amount) {
+    public Stock(int id, String matName, int total, int amount, Date date) {
         this.id = id;
-        this.name = name;
+        this.matName = matName;
         this.total = total;
         this.amount = amount;
+        this.date = date;
     }
 
-    public Stock(String name, int total, int amount) {
-        this.id = -1;
-        this.name = name;
+    public Stock(String matName, int total, int amount, Date date) {
+        this.matName = matName;
         this.total = total;
         this.amount = amount;
+        this.date = date;
     }
 
     public Stock() {
         this.id = -1;
-        this.name = "";
+        this.matName = "";
         this.total = 0;
         this.amount = 0;
+        this.date = null;
     }
 
     public int getId() {
@@ -48,12 +52,12 @@ public class Stock {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getMatName() {
+        return matName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMatName(String matName) {
+        this.matName = matName;
     }
 
     public int getTotal() {
@@ -72,18 +76,27 @@ public class Stock {
         this.amount = amount;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
-        return "Stock{" + "id=" + id + ", name=" + name + ", total=" + total + ", amount=" + amount + '}';
+        return "Stock{" + "id=" + id + ", matName=" + matName + ", total=" + total + ", amount=" + amount + ", date=" + date + '}';
     }
     
-    public static Stock fromRS(ResultSet rs) {
+     public static Stock fromRS(ResultSet rs) {
         Stock stock = new Stock();
         try {
             stock.setId(rs.getInt("stock_id"));
-            stock.setName(rs.getString("stock_name"));
+            stock.setMatName(rs.getString("mat_name"));
             stock.setTotal(rs.getInt("stock_total"));
             stock.setAmount(rs.getInt("stock_amount"));
+            stock.setDate(rs.getTimestamp("stock_date"));
         } catch (SQLException ex) {
             Logger.getLogger(Stock.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -91,3 +104,4 @@ public class Stock {
         return stock;
     }
 }
+   
