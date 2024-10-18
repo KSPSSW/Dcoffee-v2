@@ -143,7 +143,7 @@ public class MaterialDao implements Dao<Material> {
     @Override
     public Material save(Material obj) {
 
-        String sql = "INSERT INTO material (material_name, material_qty, material_total_price,material_user_import,material_price_perunit,material_shop_import)"
+        String sql = "INSERT INTO material (material_name, material_qty, material_total_price,material_price_perunit,material_shop_import)"
                 + "VALUES(?, ?, ?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
@@ -151,7 +151,6 @@ public class MaterialDao implements Dao<Material> {
             stmt.setString(1, obj.getName());
             stmt.setInt(2, obj.getQty());
             stmt.setInt(3,obj.getTotalPrice());
-            stmt.setString(4, obj.getUser());
             stmt.setInt(5,obj.getPricePerUnit());
             stmt.setString(6,obj.getShop());
             
