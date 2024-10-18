@@ -36,7 +36,7 @@ public class UserPanel extends javax.swing.JPanel {
         list = userService.getUsers();
         tblUser.setRowHeight(100);
         tblUser.setModel(new AbstractTableModel() {
-            String[] columnNames = {"ID", "Login", "Name", "Password", "Gender", "Role"};
+            String[] columnNames = {"Image", "ID", "Login", "Name", "Password", "Gender", "Role"};
             @Override
             public String getColumnName(int column) {
                 return columnNames[column];
@@ -49,7 +49,7 @@ public class UserPanel extends javax.swing.JPanel {
 
             @Override
             public int getColumnCount() {
-                return 6;
+                return 7;
             }
 
             @Override
