@@ -5,7 +5,9 @@
 package com.mycompany.project_alpabet_crud.ui;
 
 import com.mycompany.project_alpabet_crud.model.Material;
+import com.mycompany.project_alpabet_crud.model.User;
 import com.mycompany.project_alpabet_crud.service.MaterialService;
+import com.mycompany.project_alpabet_crud.service.UserService;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -20,6 +22,8 @@ public class MaterialPanel extends javax.swing.JPanel {
     private MaterialService mtService;
     private List<Material> list;
     public Material editMaterial;
+    public Material editUser;
+    public User currentUser;
     private MaterialService materialService;
     
 
@@ -33,10 +37,12 @@ public class MaterialPanel extends javax.swing.JPanel {
         LocalDateTime currentDate = LocalDateTime.now();
         materialService = new MaterialService();
         editMaterial = new Material();
+        editUser = new Material();
+        currentUser= UserService.getCurrentUser();
         
     }
     
-    private void setObjectToForm() {
+    private void setFromToObjectuser() {
         
     }
     private void setFormToObject() {
@@ -341,6 +347,8 @@ public class MaterialPanel extends javax.swing.JPanel {
 
         Material material;
         material = materialService.update(editMaterial);
+        
+        
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
