@@ -11,5 +11,5 @@ import com.mycompany.project_alpabet_crud.model.Product;
  * @author thana
  */
 public interface BuyProductable {
-    public void  buy(Product product, int qty);
+    public void  buy(Product product, int qty , String productSize , String productSweetLevel , String productType);
 }

@@ -71,7 +71,7 @@ public class Reciept {
     }
 
     public Reciept(){
-        this.id = id;
+        this.id = -1;
         this.createdDate = null;
         this.total = 0;
         this.cash = 0;
@@ -171,8 +171,8 @@ public class Reciept {
     recieptDetails.add(recieptDetail);
     calculateTotal();
     }
-     public void addRecieptDetail(Product product,int qty){
-    RecieptDetail rd = new RecieptDetail(product.getId(),product.getName(),product.getPrice(),qty,qty*product.getPrice(),-1);
+     public void addRecieptDetail(Product product,int qty , String productSize , String productSweetLevel , String productType){
+    RecieptDetail rd = new RecieptDetail(product.getId(),product.getName(),product.getPrice(),qty,qty*product.getPrice(),-1 , productSize,productSweetLevel,productType);
     recieptDetails.add(rd);
     calculateTotal();
     }

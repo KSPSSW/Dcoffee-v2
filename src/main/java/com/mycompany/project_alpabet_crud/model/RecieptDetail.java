@@ -22,8 +22,35 @@ public class RecieptDetail {
     private int qty;
     private float totalPrice;
     private int recieptId;
+    private String productSize;
+    private String productSweetLevel;
+    private String productType;
 
-    public RecieptDetail(int id, int productId, String productName, float productPrice, int qty, float totalPrice, int recieptId) {
+    public String getProductSize() {
+        return productSize;
+    }
+
+    public void setProductSize(String productSize) {
+        this.productSize = productSize;
+    }
+
+    public String getProductSweetLevel() {
+        return productSweetLevel;
+    }
+
+    public void setProductSweetLevel(String productSweetLevel) {
+        this.productSweetLevel = productSweetLevel;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public RecieptDetail(int id, int productId, String productName, float productPrice, int qty, float totalPrice, int recieptId, String productSize, String productSweetLevel, String productType) {
         this.id = id;
         this.productId = productId;
         this.productName = productName;
@@ -31,9 +58,12 @@ public class RecieptDetail {
         this.qty = qty;
         this.totalPrice = totalPrice;
         this.recieptId = recieptId;
+        this.productSize = productSize;
+        this.productSweetLevel = productSweetLevel;
+        this.productType = productType;
     }
 
-    public RecieptDetail(int productId, String productName, float productPrice, int qty, float totalPrice, int recieptId) {
+    public RecieptDetail(int productId, String productName, float productPrice, int qty, float totalPrice, int recieptId, String productSize, String productSweetLevel, String productType) {
         this.id = -1;
         this.productId = productId;
         this.productName = productName;
@@ -41,6 +71,9 @@ public class RecieptDetail {
         this.qty = qty;
         this.totalPrice = totalPrice;
         this.recieptId = recieptId;
+        this.productSize = productSize;
+        this.productSweetLevel = productSweetLevel;
+        this.productType = productType;
     }
 
     public RecieptDetail() {
@@ -51,6 +84,9 @@ public class RecieptDetail {
         this.qty = 0;
         this.totalPrice = 0;
         this.recieptId = 0;
+        this.productSize = "";
+        this.productSweetLevel = "";
+        this.productType = "";
     }
 
     public int getId() {
@@ -87,12 +123,12 @@ public class RecieptDetail {
 
     public int getQty() {
         return qty;
-        
+
     }
 
     public void setQty(int qty) {
         this.qty = qty;
-        totalPrice = qty*productPrice;
+        totalPrice = qty * productPrice;
     }
 
     public float getTotalPrice() {
@@ -115,6 +151,7 @@ public class RecieptDetail {
     public String toString() {
         return "RecieptDetail{" + "id=" + id + ", productId=" + productId + ", productName=" + productName + ", productPrice=" + productPrice + ", qty=" + qty + ", totalPrice=" + totalPrice + ", recieptId=" + recieptId + '}';
     }
+
     public static RecieptDetail fromRS(ResultSet rs) {
         RecieptDetail recieptDetail = new RecieptDetail();
         try {
@@ -125,7 +162,7 @@ public class RecieptDetail {
             recieptDetail.setQty(rs.getInt("qty"));
             recieptDetail.setTotalPrice(rs.getFloat("total_price"));
             recieptDetail.setRecieptId(rs.getInt("reciept_id"));
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
             return null;

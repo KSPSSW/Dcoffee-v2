@@ -49,7 +49,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
                     return;
                 }
                 for (BuyProductable s : subscribers) {
-                    s.buy(product, Integer.parseInt(txtQty.getText()));
+                    s.buy(product, Integer.parseInt(txtQty.getText()),product.getSize(),product.getSweetLevel(),product.getType());
                 }
                 txtQty.setText("1");
             }

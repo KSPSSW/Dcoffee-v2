@@ -4,7 +4,6 @@
  */
 package com.mycompany.project_alpabet_crud.component;
 
-
 import com.mycompany.project_alpabet_crud.model.Product;
 import com.mycompany.project_alpabet_crud.service.ProductService;
 import java.awt.GridLayout;
@@ -91,10 +90,10 @@ public class ProductListPanel extends javax.swing.JPanel implements BuyProductab
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void buy(Product product, int qty) {
+    public void buy(Product product, int qty, String productSize, String productSweetLevel, String productType) {
         System.out.println(product.getName() + " " + qty);
-        for (BuyProductable s : subscribers){
-            s.buy(product, qty);
+        for (BuyProductable s : subscribers) {
+            s.buy(product, qty, productSize , productSweetLevel , productType );
         }
     }
 }

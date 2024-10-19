@@ -48,7 +48,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         receipt = new Reciept();
 
         tblreciept.setModel(new AbstractTableModel() {
-            String[] header = {"Name", "Price", "Quantity", "Total"};
+            String[] header = {"Name", "Size", "SweelLevel", "Type", "Price", "Quantity", "Total"};
 
             @Override
             public String getColumnName(int column) {
@@ -62,7 +62,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
             @Override
             public int getColumnCount() {
-                return 4;
+                return 7;
             }
 
             @Override
@@ -72,11 +72,18 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                 switch (columnIndex) {
                     case 0:
                         return receiptDetail.getProductName();
+
                     case 1:
-                        return receiptDetail.getProductPrice();
+                        return receiptDetail.getProductSize();
                     case 2:
-                        return receiptDetail.getQty();
+                        return receiptDetail.getProductSweetLevel();
                     case 3:
+                        return receiptDetail.getProductType();
+                    case 4:
+                        return receiptDetail.getProductPrice();
+                    case 5:
+                        return receiptDetail.getQty();
+                    case 6:
                         return receiptDetail.getTotalPrice();
                     default:
                         return "";
@@ -356,19 +363,22 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
     }
 
     @Override
-    public void buy(Product product, int qty) {
+    public void buy(Product product, int qty, String productSize, String productSweetLevel, String productType) {
         ArrayList<RecieptDetail> receiptDetails = receipt.getRecieptDetails();
         boolean productExists = false;
 
         for (RecieptDetail detail : receiptDetails) {
-            if (detail.getProductId() == product.getId()) {
+            if (detail.getProductId() == product.getId()
+                    && detail.getProductSize().equals(productSize)
+                    && detail.getProductSweetLevel().equals(productSweetLevel)
+                    && detail.getProductType().equals(productType)) {
                 detail.setQty(detail.getQty() + qty);
                 productExists = true;
                 break;
             }
         }
         if (!productExists) {
-            receipt.addRecieptDetail(product, qty);
+            receipt.addRecieptDetail(product, qty, productSize, productSweetLevel, productType);
         }
         refreshReciept();
     }
@@ -378,4 +388,5 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         lblchange.setText("00.0");
         lbltotal.setText("00.0");
     }
+
 }

@@ -60,7 +60,7 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
                     break;
             }
         }
-              cbmType.setModel(new javax.swing.DefaultComboBoxModel<>(types));
+              cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(types));
               //cbmType.setSelectedIndex(1); //setDefault = Cold
 
               
@@ -87,7 +87,7 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
         jLabel4 = new javax.swing.JLabel();
         cmbSize = new javax.swing.JComboBox<>();
         cmbSweetLevel = new javax.swing.JComboBox<>();
-        cbmType = new javax.swing.JComboBox<>();
+        cmbType = new javax.swing.JComboBox<>();
         btnMinus = new javax.swing.JButton();
         btnPlus = new javax.swing.JButton();
         lblQty = new javax.swing.JLabel();
@@ -119,8 +119,8 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
         cmbSweetLevel.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         cmbSweetLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        cbmType.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
-        cbmType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbType.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
+        cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnMinus.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         btnMinus.setText("-");
@@ -186,7 +186,7 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbSweetLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbmType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -204,7 +204,7 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbmType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +263,9 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         for (BuyProductable s : subscribers) {
-                    s.buy(product, Integer.parseInt(lblQty.getText()));
+                    s.buy(product, Integer.parseInt(lblQty.getText()), cmbSize.getSelectedItem().toString(),
+                    cmbSweetLevel.getSelectedItem().toString(),
+                    cmbType.getSelectedItem().toString());
                 }
                 lblQty.setText("1");
     }//GEN-LAST:event_btnConfirmActionPerformed
@@ -290,9 +292,9 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnMinus;
     private javax.swing.JButton btnPlus;
-    private javax.swing.JComboBox<String> cbmType;
     private javax.swing.JComboBox<String> cmbSize;
     private javax.swing.JComboBox<String> cmbSweetLevel;
+    private javax.swing.JComboBox<String> cmbType;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

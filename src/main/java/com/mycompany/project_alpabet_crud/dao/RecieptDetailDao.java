@@ -105,8 +105,8 @@ public class RecieptDetailDao implements Dao<RecieptDetail> {
     @Override
     public RecieptDetail save(RecieptDetail obj) {
 
-        String sql = "INSERT INTO receipt_detail (product_id,product_name,product_price,qty,total_price,receipt_id)"
-                + "VALUES(?, ?,?,?,?,?)";
+        String sql = "INSERT INTO receipt_detail (product_id,product_name,product_price,qty,total_price,receipt_id,product_size,product_sweet_level,product_type)"
+                + "VALUES(?, ?,?,?,?,?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -116,6 +116,9 @@ public class RecieptDetailDao implements Dao<RecieptDetail> {
             stmt.setInt(4,obj.getQty());
             stmt.setFloat(5,obj.getTotalPrice());
             stmt.setInt(6,obj.getRecieptId());
+            stmt.setString(7, obj.getProductSize());
+            stmt.setString(8, obj.getProductSweetLevel());
+            stmt.setString(9, obj.getProductType());
 //            System.out.println(stmt);
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
