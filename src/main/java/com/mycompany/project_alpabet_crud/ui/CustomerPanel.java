@@ -36,7 +36,7 @@ public class CustomerPanel extends javax.swing.JPanel {
         list = csService.getCustomers();
 //        System.out.println(list);
         tblCustomer.setModel(new AbstractTableModel() {
-            String[] columnName = {"ID", "Name", "Telephone"};
+            String[] columnName = {"Image","ID", "Name", "Telephone"};
 
             @Override
             public String getColumnName(int column) {
@@ -50,7 +50,7 @@ public class CustomerPanel extends javax.swing.JPanel {
 
             @Override
             public int getColumnCount() {
-                return 3;
+                return 4;
             }
 
             @Override
