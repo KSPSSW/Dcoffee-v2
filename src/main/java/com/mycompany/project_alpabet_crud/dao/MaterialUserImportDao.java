@@ -83,15 +83,15 @@ public class MaterialUserImportDao {
     }
 
     public MaterialUserImport save(MaterialUserImport obj) {
-
-        String sql = "INSERT INTO material_user_import (material_user_import_id, material_user_import_name, material_import_name)"
-                + "VALUES(?, ?, ?)";
+        String sql = "INSERT INTO material_user_import (material_user_import_id, material_user_import_name, material_import_name, material_import_Qty )"
+                + "VALUES(?, ?, ?, ?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1,obj.getUserId());
             stmt.setString(2,obj.getUserName());
             stmt.setString(3,obj.getMaterialName());
+            stmt.setInt(4,obj.getMaterialQty());
             
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);

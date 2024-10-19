@@ -24,6 +24,7 @@ public class MaterialUserImport {
             MaterialUserImport.setUserId(rs.getInt("material_user_import_id"));
             MaterialUserImport.setUserName(rs.getString("material_user_import_name"));
             MaterialUserImport.setMaterialName(rs.getString("material_import_name"));
+            MaterialUserImport.setMaterialQty(rs.getInt("material_import_Qty"));
         } catch(SQLException ex){
             Logger.getLogger(MaterialUserImport.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -35,21 +36,24 @@ public class MaterialUserImport {
     private int userId;
     private String userName;
     private String materialName;
+    private int materialQty;
 
-    public MaterialUserImport(int id,  Date date, int userId, String userName, String materialName) {
+    public MaterialUserImport(int id,  Date date, int userId, String userName, String materialName,int materialQty) {
         this.id = id;
         this.date = date;
         this.userId = userId;
         this.userName = userName;
         this.materialName = materialName;
+        this.materialQty = materialQty;
     }
 
-    public MaterialUserImport(Date date, int userId, String userName ,String materialName) {
+    public MaterialUserImport(Date date, int userId, String userName ,String materialName,int materialQty) {
         this.id = -1;
         this.date = date;
         this.userId = userId;
         this.userName = userName;
         this.materialName = materialName;
+        this.materialQty = materialQty;
     }
 
     public MaterialUserImport() {
@@ -58,6 +62,7 @@ public class MaterialUserImport {
         this.userId = 0;
         this.userName = "";
         this.materialName = "";
+        this.materialQty= 0;
     }
 
     public int getId() {
@@ -100,10 +105,17 @@ public class MaterialUserImport {
         this.materialName = materialName;
     }
 
+   public int getMaterialQty() {
+        return materialQty;
+    }
+
+    public void setMaterialQty(int materialQty) {
+        this.materialQty = materialQty;
+    }
+
     @Override
     public String toString() {
-        return "MaterialUserImport{" + "id=" + id + ", date=" + date + ", userId=" + userId + ", userName=" + userName + ", materialName=" + materialName + '}';
+        return "MaterialUserImport{" + "id=" + id + ", date=" + date + ", userId=" + userId + ", userName=" + userName + ", materialName=" + materialName + ", materialQty=" + materialQty + '}';
     }
-    
     
 }
