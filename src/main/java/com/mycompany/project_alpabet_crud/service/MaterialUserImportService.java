@@ -13,7 +13,7 @@ import java.util.List;
  * @author teeraphat
  */
 public class MaterialUserImportService {
-    public List<MaterialUserImport> getMaterial(){
+    public List<MaterialUserImport> getMaterialUserImport(){
         MaterialUserImportDao materialUserImportDao = new MaterialUserImportDao();
         return materialUserImportDao.getAll(" material_import_id desc");
     }

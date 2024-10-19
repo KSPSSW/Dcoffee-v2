@@ -5,11 +5,20 @@
 package com.mycompany.project_alpabet_crud.ui;
 
 import com.mycompany.project_alpabet_crud.model.Material;
+import com.mycompany.project_alpabet_crud.model.MaterialUserImport;
 import com.mycompany.project_alpabet_crud.model.User;
 import com.mycompany.project_alpabet_crud.service.MaterialService;
+import com.mycompany.project_alpabet_crud.service.MaterialUserImportService;
 import com.mycompany.project_alpabet_crud.service.UserService;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,9 +31,13 @@ public class MaterialPanel extends javax.swing.JPanel {
     private MaterialService mtService;
     private List<Material> list;
     public Material editMaterial;
-    public Material editUser;
+    public MaterialUserImport editMaterialImport;
+    public MaterialUserImport matimp;
     public User currentUser;
     private MaterialService materialService;
+    private MaterialUserImportService materialUserImportService;
+    private final MaterialUserImportService mtimService;
+    private List<MaterialUserImport> listmatimp;
     
 
     /**
@@ -34,15 +47,57 @@ public class MaterialPanel extends javax.swing.JPanel {
         initComponents();
         DefaultTableModel model = (DefaultTableModel)tblPreImport.getModel();
         model.setColumnIdentifiers(new Object[]{"Name", "Qty", "Price", "Shop"});
-        LocalDateTime currentDate = LocalDateTime.now();
         materialService = new MaterialService();
+        materialUserImportService = new MaterialUserImportService();
         editMaterial = new Material();
-        editUser = new Material();
-        currentUser= UserService.getCurrentUser();
+        editMaterialImport = new MaterialUserImport();
         
+        // tbleployee **********************************************************************************************************************************
+        mtimService = new MaterialUserImportService();
+        tblEmployee.setRowHeight(100);
+        listmatimp = mtimService.getMaterialUserImport();
+        tblEmployee.setModel(new AbstractTableModel() {
+            String[] columnName = {"Date", "User Id", "User Name"};
+
+            @Override
+            public String getColumnName(int column) {
+                return columnName[column];
+            }
+            
+            @Override
+            public int getRowCount() {
+                return listmatimp.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 3;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                MaterialUserImport  materialuserimport = listmatimp.get(rowIndex);
+                switch (columnIndex) {
+                    case 0:
+                        return materialuserimport.getDate();
+                    case 1:
+                        return materialuserimport.getUserId();
+                    case 2:
+                        return materialuserimport.getUserName();
+                    default:
+                        return "unknown";
+                }
+            }
+        });
     }
     
     private void setFromToObjectuser() {
+        int qty = Integer.parseInt(edtQty.getText().toString());
+        editMaterialImport.setMaterialQty(qty);;
+
+        editMaterialImport.setUserId(UserService.getCurrentUser().getId());
+        editMaterialImport.setUserName(UserService.getCurrentUser().getName());
+        editMaterialImport.setMaterialName((String) cmbMaterial.getSelectedItem());
         
     }
     private void setFormToObject() {
@@ -94,6 +149,7 @@ public class MaterialPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
+        btnViewdetail = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPreImport = new javax.swing.JTable();
@@ -219,14 +275,22 @@ public class MaterialPanel extends javax.swing.JPanel {
         tblEmployee.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1", "Title 2", "Title 3"
             }
         ));
         jScrollPane2.setViewportView(tblEmployee);
+
+        btnViewdetail.setText("View Detail");
+        btnViewdetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewdetailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -234,14 +298,20 @@ public class MaterialPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnViewdetail, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(btnViewdetail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -286,12 +356,12 @@ public class MaterialPanel extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnImport))
-                    .addComponent(jScrollPane1))
+                        .addComponent(btnImport)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -299,7 +369,7 @@ public class MaterialPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -347,17 +417,21 @@ public class MaterialPanel extends javax.swing.JPanel {
 
         Material material;
         material = materialService.update(editMaterial);
-        
-        
+        MaterialUserImport materialUserImport;
+        materialUserImport = materialUserImportService.addNew(editMaterialImport);
+        tblEmployee.repaint();
+        refreshTable();
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         setFormToObject();
+        setFromToObjectuser();
         mtService = new MaterialService();
         tblPreImport.setRowHeight(100);
         list = mtService.getMaterial();
 //        System.out.println(list);
         System.out.println(editMaterial);
+        System.out.println(editMaterialImport);
         tblPreImport.setModel(new AbstractTableModel() {
             String[] columnName = {"ID","Name", "Qty", "Price", "Shop"};
 
@@ -395,7 +469,12 @@ public class MaterialPanel extends javax.swing.JPanel {
         });
         
         
+        
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnViewdetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewdetailActionPerformed
+        openDialog();
+    }//GEN-LAST:event_btnViewdetailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -403,6 +482,7 @@ public class MaterialPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnViewdetail;
     private javax.swing.JComboBox<String> cmbMaterial;
     private javax.swing.JTextField edtQty;
     private javax.swing.JTextField edtShop;
@@ -421,6 +501,32 @@ public class MaterialPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTable tblPreImport;
     // End of variables declaration//GEN-END:variables
+
+    private void refreshTable() {
+        listmatimp = materialUserImportService.getMaterialUserImport();
+        tblEmployee.revalidate();
+        tblEmployee.repaint();
+    }
+
+    private void openDialog() {
+        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
+        MaterialUserImportDialog panelToView = new MaterialUserImportDialog(frame);
+        panelToView.setSize(300, 200);
+
+        JFrame newFrame = new JFrame("Material User Import");
+        newFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+        newFrame.add(panelToView);
+        newFrame.pack(); 
+        newFrame.setLocationRelativeTo(frame); 
+        newFrame.setVisible(true);
+
+        newFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshTable(); 
+            }
+        });
+    }
     
     
 }
