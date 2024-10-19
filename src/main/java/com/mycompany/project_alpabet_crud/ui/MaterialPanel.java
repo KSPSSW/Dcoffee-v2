@@ -5,8 +5,10 @@
 package com.mycompany.project_alpabet_crud.ui;
 
 import com.mycompany.project_alpabet_crud.model.Material;
+import com.mycompany.project_alpabet_crud.model.MaterialUserImport;
 import com.mycompany.project_alpabet_crud.model.User;
 import com.mycompany.project_alpabet_crud.service.MaterialService;
+import com.mycompany.project_alpabet_crud.service.MaterialUserImportService;
 import com.mycompany.project_alpabet_crud.service.UserService;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,9 +24,13 @@ public class MaterialPanel extends javax.swing.JPanel {
     private MaterialService mtService;
     private List<Material> list;
     public Material editMaterial;
-    public Material editUser;
+    public MaterialUserImport editMaterialImport;
+    public MaterialUserImport matimp;
     public User currentUser;
     private MaterialService materialService;
+    private MaterialUserImportService materialUserImportService;
+    private final MaterialUserImportService mtimService;
+    private List<MaterialUserImport> listmatimp;
     
 
     /**
@@ -34,15 +40,59 @@ public class MaterialPanel extends javax.swing.JPanel {
         initComponents();
         DefaultTableModel model = (DefaultTableModel)tblPreImport.getModel();
         model.setColumnIdentifiers(new Object[]{"Name", "Qty", "Price", "Shop"});
-        LocalDateTime currentDate = LocalDateTime.now();
         materialService = new MaterialService();
+        materialUserImportService = new MaterialUserImportService();
         editMaterial = new Material();
-        editUser = new Material();
-        currentUser= UserService.getCurrentUser();
+        editMaterialImport = new MaterialUserImport();
         
+        // tbleployee **********************************************************************************************************************************
+        mtimService = new MaterialUserImportService();
+        tblEmployee.setRowHeight(100);
+        listmatimp = mtimService.getMaterialUserImport();
+        tblEmployee.setModel(new AbstractTableModel() {
+            String[] columnName = {"ID","Date", "User Id", "User Name", "Material Name"};
+
+            @Override
+            public String getColumnName(int column) {
+                return columnName[column];
+            }
+            
+            @Override
+            public int getRowCount() {
+                return listmatimp.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 5;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                MaterialUserImport  materialuserimport = listmatimp.get(rowIndex);
+                switch (columnIndex) {
+                    case 0:
+                        return materialuserimport.getId();
+                    case 1:
+                        return materialuserimport.getDate();
+                    case 2:
+                        return materialuserimport.getUserId();
+                    case 3:
+                        return materialuserimport.getUserName();
+                    case 4:
+                        return materialuserimport.getMaterialName();
+                    default:
+                        return "unknown";
+                }
+            }
+        });
     }
     
     private void setFromToObjectuser() {
+        editMaterialImport.setUserId(UserService.getCurrentUser().getId());
+        editMaterialImport.setUserName(UserService.getCurrentUser().getName());
+        editMaterialImport.setMaterialName((String) cmbMaterial.getSelectedItem());
+        
         
     }
     private void setFormToObject() {
@@ -219,11 +269,14 @@ public class MaterialPanel extends javax.swing.JPanel {
         tblEmployee.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
         jScrollPane2.setViewportView(tblEmployee);
@@ -347,17 +400,21 @@ public class MaterialPanel extends javax.swing.JPanel {
 
         Material material;
         material = materialService.update(editMaterial);
-        
-        
+        MaterialUserImport materialUserImport;
+        materialUserImport = materialUserImportService.addNew(editMaterialImport);
+        tblEmployee.repaint();
+        refreshTable();
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         setFormToObject();
+        setFromToObjectuser();
         mtService = new MaterialService();
         tblPreImport.setRowHeight(100);
         list = mtService.getMaterial();
 //        System.out.println(list);
         System.out.println(editMaterial);
+        System.out.println(editMaterialImport);
         tblPreImport.setModel(new AbstractTableModel() {
             String[] columnName = {"ID","Name", "Qty", "Price", "Shop"};
 
@@ -395,6 +452,7 @@ public class MaterialPanel extends javax.swing.JPanel {
         });
         
         
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
 
@@ -421,6 +479,12 @@ public class MaterialPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTable tblPreImport;
     // End of variables declaration//GEN-END:variables
+
+    private void refreshTable() {
+        listmatimp = materialUserImportService.getMaterialUserImport();
+        tblEmployee.revalidate();
+        tblEmployee.repaint();
+    }
     
     
 }
