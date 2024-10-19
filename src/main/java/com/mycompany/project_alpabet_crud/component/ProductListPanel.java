@@ -18,14 +18,15 @@ public class ProductListPanel extends javax.swing.JPanel implements BuyProductab
     private final ProductService productService;
     private final ArrayList<Product> products;
     private ArrayList<BuyProductable> subscribers = new ArrayList<>();
+    private int categoryId;
 
     /**
      * Creates new form ProductListPanel
      */
-    public ProductListPanel() {
+    public ProductListPanel(int categoryId) {
         initComponents();
         productService = new ProductService();
-        products = productService.getProductsOrderByName();
+        products = productService.getProductsCategoryOrderByName(categoryId);
         int ProductSize = products.size();
         System.out.println(products);
         System.out.println(products.size());

@@ -36,9 +36,12 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
     RecieptService receiptService = new RecieptService();
 
     Reciept receipt;
-    private final ProductListPanel productListPanel;
+    private  ProductListPanel productListPanel;
     private List<Reciept> list;
     private Reciept editedReciept;
+    private final ProductListPanel coffeeProductListPanel;
+    private final ProductListPanel dessertProductListPanel;
+    private final ProductListPanel candyProductListPanel;
 
     /**
      * Creates new form PosPanel
@@ -116,12 +119,16 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                 }
             }
         });
-        productListPanel = new ProductListPanel();
-        productListPanel.addOnByProduct(this);
-        coffeeTab.add(productListPanel);
-        dessertTab.add(new ProductListPanel());
-        candyTab.add(new ProductListPanel());
-        jScrollPane3.setViewportView(categoryTab);
+        coffeeProductListPanel = new ProductListPanel(1); // หมวดกาแฟ (id = 1)
+        dessertProductListPanel = new ProductListPanel(2); // หมวดขนมหวาน (id = 2)
+        candyProductListPanel = new ProductListPanel(3); // หมวดลูกกวาด (id = 3)
+        coffeeProductListPanel.addOnByProduct(this);
+        dessertProductListPanel.addOnByProduct(this);
+        candyProductListPanel.addOnByProduct(this);
+         coffeeTab.setViewportView(coffeeProductListPanel);
+        dessertTab.setViewportView(dessertProductListPanel);
+        candyTab.setViewportView(candyProductListPanel);
+
     }
 
     private void refreshReciept() {
@@ -144,9 +151,9 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         categoryTab = new javax.swing.JTabbedPane();
-        coffeeTab = new javax.swing.JPanel();
-        dessertTab = new javax.swing.JPanel();
-        candyTab = new javax.swing.JPanel();
+        coffeeTab = new javax.swing.JScrollPane();
+        dessertTab = new javax.swing.JScrollPane();
+        candyTab = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbltotal = new javax.swing.JLabel();
@@ -187,44 +194,8 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                 categoryTabMousePressed(evt);
             }
         });
-
-        javax.swing.GroupLayout coffeeTabLayout = new javax.swing.GroupLayout(coffeeTab);
-        coffeeTab.setLayout(coffeeTabLayout);
-        coffeeTabLayout.setHorizontalGroup(
-            coffeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
-        );
-        coffeeTabLayout.setVerticalGroup(
-            coffeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
-        );
-
         categoryTab.addTab("Coffee", coffeeTab);
-
-        javax.swing.GroupLayout dessertTabLayout = new javax.swing.GroupLayout(dessertTab);
-        dessertTab.setLayout(dessertTabLayout);
-        dessertTabLayout.setHorizontalGroup(
-            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
-        );
-        dessertTabLayout.setVerticalGroup(
-            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
-        );
-
         categoryTab.addTab("Dessert", dessertTab);
-
-        javax.swing.GroupLayout candyTabLayout = new javax.swing.GroupLayout(candyTab);
-        candyTab.setLayout(candyTabLayout);
-        candyTabLayout.setHorizontalGroup(
-            candyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
-        );
-        candyTabLayout.setVerticalGroup(
-            candyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
-        );
-
         categoryTab.addTab("Candy", candyTab);
 
         jScrollPane3.setViewportView(categoryTab);
@@ -329,7 +300,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(1966, 1966, 1966))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,20 +357,20 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         dessertTab.setVisible(false);
         candyTab.setVisible(false);
         switch (selectedIndex) {
-            case 0: // Coffee tab
-                coffeeTab.setVisible(true);
-                break;
-            case 1: // Dessert tab
-                dessertTab.setVisible(true);
-                break;
-            case 2: // Candy tab
-                candyTab.setVisible(true);
-                break;
-            default:
-                break;
-        }
+        case 0: // Coffee tab
+            coffeeTab.setVisible(true);
+            break;
+        case 1: // Dessert tab
+            dessertTab.setVisible(true);
+            break;
+        case 2: // Candy tab
+            candyTab.setVisible(true);
+            break;
+        default:
+            break;
+    }
         revalidate();
-        repaint();
+    repaint();
     }//GEN-LAST:event_categoryTabMousePressed
     public void clearReceipt() {
         receipt = new Reciept();
@@ -409,10 +380,10 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
-    private javax.swing.JPanel candyTab;
+    private javax.swing.JScrollPane candyTab;
     private javax.swing.JTabbedPane categoryTab;
-    private javax.swing.JPanel coffeeTab;
-    private javax.swing.JPanel dessertTab;
+    private javax.swing.JScrollPane coffeeTab;
+    private javax.swing.JScrollPane dessertTab;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
