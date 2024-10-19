@@ -45,6 +45,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
      */
     public PosPanel() {
         initComponents();
+
         receipt = new Reciept();
 
         tblreciept.setModel(new AbstractTableModel() {
@@ -117,7 +118,10 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         });
         productListPanel = new ProductListPanel();
         productListPanel.addOnByProduct(this);
-        jScrollPane3.setViewportView(productListPanel);
+        coffeeTab.add(productListPanel);
+        dessertTab.add(new ProductListPanel());
+        candyTab.add(new ProductListPanel());
+        jScrollPane3.setViewportView(categoryTab);
     }
 
     private void refreshReciept() {
@@ -139,6 +143,10 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         tblreciept = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
+        categoryTab = new javax.swing.JTabbedPane();
+        coffeeTab = new javax.swing.JPanel();
+        dessertTab = new javax.swing.JPanel();
+        candyTab = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbltotal = new javax.swing.JLabel();
@@ -173,6 +181,53 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        categoryTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                categoryTabMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout coffeeTabLayout = new javax.swing.GroupLayout(coffeeTab);
+        coffeeTab.setLayout(coffeeTabLayout);
+        coffeeTabLayout.setHorizontalGroup(
+            coffeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+        coffeeTabLayout.setVerticalGroup(
+            coffeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+
+        categoryTab.addTab("Coffee", coffeeTab);
+
+        javax.swing.GroupLayout dessertTabLayout = new javax.swing.GroupLayout(dessertTab);
+        dessertTab.setLayout(dessertTabLayout);
+        dessertTabLayout.setHorizontalGroup(
+            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+        dessertTabLayout.setVerticalGroup(
+            dessertTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+
+        categoryTab.addTab("Dessert", dessertTab);
+
+        javax.swing.GroupLayout candyTabLayout = new javax.swing.GroupLayout(candyTab);
+        candyTab.setLayout(candyTabLayout);
+        candyTabLayout.setHorizontalGroup(
+            candyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+        candyTabLayout.setVerticalGroup(
+            candyTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+
+        categoryTab.addTab("Candy", candyTab);
+
+        jScrollPane3.setViewportView(categoryTab);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -266,23 +321,24 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(1966, 1966, 1966))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -290,8 +346,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane3))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -324,6 +379,28 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
 
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void categoryTabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTabMousePressed
+        int selectedIndex = categoryTab.getSelectedIndex();
+        coffeeTab.setVisible(false);
+        dessertTab.setVisible(false);
+        candyTab.setVisible(false);
+        switch (selectedIndex) {
+            case 0: // Coffee tab
+                coffeeTab.setVisible(true);
+                break;
+            case 1: // Dessert tab
+                dessertTab.setVisible(true);
+                break;
+            case 2: // Candy tab
+                candyTab.setVisible(true);
+                break;
+            default:
+                break;
+        }
+        revalidate();
+        repaint();
+    }//GEN-LAST:event_categoryTabMousePressed
     public void clearReceipt() {
         receipt = new Reciept();
 
@@ -332,6 +409,10 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JPanel candyTab;
+    private javax.swing.JTabbedPane categoryTab;
+    private javax.swing.JPanel coffeeTab;
+    private javax.swing.JPanel dessertTab;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

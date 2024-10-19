@@ -43,6 +43,8 @@ public class ProductListPanel extends javax.swing.JPanel implements BuyProductab
         subscribers.add(subscriber);
 
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
