@@ -167,14 +167,16 @@ public class MaterialDao implements Dao<Material> {
     @Override
     public Material update(Material obj) {
         String sql = "UPDATE material"
-                + " SET material_name = ?, material_qty = ?, material_price = ?"
-                + " WHERE material_id = ?";
+                + " SET material_qty = material_qty + ?, material_total_price = material_total_price + ?, material_price_perunit = (material_price_perunit + ?) / 2 , material_shop_import = ?"
+                + " WHERE material_name = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getName());
-            stmt.setInt(2, obj.getQty());
-            stmt.setInt(3,obj.getTotalPrice());
+            stmt.setInt(1, obj.getQty());
+            stmt.setInt(2, obj.getTotalPrice());
+            stmt.setInt(3, obj.getPricePerUnit());
+            stmt.setString(4, obj.getShop());
+            stmt.setString(5, obj.getName());
 //            System.out.println(stmt);
             int ret = stmt.executeUpdate();
             System.out.println(ret);
