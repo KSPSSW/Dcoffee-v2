@@ -132,6 +132,11 @@ public class ProductDialog extends javax.swing.JDialog {
 
         cmbCategoryId.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
         cmbCategoryId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        cmbCategoryId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoryIdActionPerformed(evt);
+            }
+        });
 
         btnSave.setBackground(new java.awt.Color(153, 255, 153));
         btnSave.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
@@ -318,25 +323,29 @@ public class ProductDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_edtSweetLevelActionPerformed
 
+    private void cmbCategoryIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoryIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoryIdActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    private void setFormToObject() {
+     private void setFormToObject() {
         editedProduct.setName(edtName.getText());
         editedProduct.setPrice(Float.parseFloat(edtPrice.getText().toString())); //แปลง String เป็น Float
         editedProduct.setSize(edtSize.getText());
         editedProduct.setSweetLevel(edtSweetLevel.getText());
         editedProduct.setType(edtType.getText());
-        editedProduct.setCategoryId(cmbCategoryId.getSelectedIndex());
+        editedProduct.setCategoryId(Integer.parseInt((String) cmbCategoryId.getSelectedItem()));
     }
 
-    private void setObjectToForm() {
+     private void setObjectToForm() {
         edtName.setText(editedProduct.getName());
         edtPrice.setText(String.valueOf(editedProduct.getPrice())); //แปลง Float เป็น String
         edtSize.setText(editedProduct.getSize());
         edtType.setText(editedProduct.getSweetLevel());
         edtType.setText(editedProduct.getType());
-        cmbCategoryId.setSelectedIndex(editedProduct.getCategoryId());
+        cmbCategoryId.setSelectedItem(String.valueOf(editedProduct.getCategoryId()));
     }
 
 
