@@ -40,12 +40,13 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
     private ArrayList<BuyProductable> subscribers = new ArrayList<>();
     private ProductListPanel productListPanel;
     private List<RecieptDetail> list;
-    private RecieptDetail editedRecieptDetail;
+    private RecieptDetail recieptDetail;
     private Reciept editedReciept;
     private final ProductListPanel coffeeProductListPanel;
     private final ProductListPanel dessertProductListPanel;
     private final ProductListPanel candyProductListPanel;
     private Product product;
+
 
     /**
      * Creates new form PosPanel
@@ -430,7 +431,19 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         Addcash(paymentDialog);
         lblchange.setText("" + (receipt.getCash() - receipt.getTotal()));
     }
+    private void openDialog1() {
+        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
+        ProductSaleDialog productsaleDialog = new ProductSaleDialog(frame, product);
+        productsaleDialog.setLocationRelativeTo(this);
+        productsaleDialog.setVisible(true);
+        productsaleDialog.addWindowListener(new WindowAdapter() {
 
+        });
+
+        for (BuyProductable s : subscribers) { // add ProductSaleDialog to Subscriber
+            productsaleDialog.addOnByProduct(s);
+        }
+    }
 
     private void Addcash(CashDialog paymentDialog) {
         float cash = paymentDialog.resultNumber;

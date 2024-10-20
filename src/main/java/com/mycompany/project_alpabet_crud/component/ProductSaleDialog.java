@@ -5,6 +5,7 @@
 package com.mycompany.project_alpabet_crud.component;
 
 import com.mycompany.project_alpabet_crud.model.Product;
+import com.mycompany.project_alpabet_crud.model.RecieptDetail;
 import com.mycompany.project_alpabet_crud.service.ProductService;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class ProductSaleDialog extends javax.swing.JDialog{
 private ArrayList<BuyProductable> subscribers = new ArrayList<>();
     private Product product = new Product();
     private ProductService productService = new ProductService();
-
+    
     /**
      * Creates new form ProductSaleDialog
      */
@@ -61,12 +62,8 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
             }
         }
               cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(types));
-              //cbmType.setSelectedIndex(1); //setDefault = Cold
-
-              
-              
+              //cbmType.setSelectedIndex(1); //setDefault = Cold       
     }
-    
         public void addOnByProduct(BuyProductable subscriber) {
         subscribers.add(subscriber);
 
