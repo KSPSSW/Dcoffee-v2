@@ -6,6 +6,7 @@ package com.mycompany.project_alpabet_crud.ui;
 
 import com.mycompany.project_alpabet_crud.component.BuyProductable;
 import com.mycompany.project_alpabet_crud.component.ProductListPanel;
+import com.mycompany.project_alpabet_crud.component.ProductSaleDialog;
 import com.mycompany.project_alpabet_crud.model.Product;
 import com.mycompany.project_alpabet_crud.model.Reciept;
 import com.mycompany.project_alpabet_crud.model.RecieptDetail;
@@ -36,12 +37,15 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
     RecieptService receiptService = new RecieptService();
 
     Reciept receipt;
-    private  ProductListPanel productListPanel;
-    private List<Reciept> list;
+    private ArrayList<BuyProductable> subscribers = new ArrayList<>();
+    private ProductListPanel productListPanel;
+    private List<RecieptDetail> list;
+    private RecieptDetail editedRecieptDetail;
     private Reciept editedReciept;
     private final ProductListPanel coffeeProductListPanel;
     private final ProductListPanel dessertProductListPanel;
     private final ProductListPanel candyProductListPanel;
+    private Product product;
 
     /**
      * Creates new form PosPanel
@@ -112,7 +116,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 switch (columnIndex) {
-                    case 2:
+                    case 5:
                         return true;
                     default:
                         return false;
@@ -125,7 +129,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         coffeeProductListPanel.addOnByProduct(this);
         dessertProductListPanel.addOnByProduct(this);
         candyProductListPanel.addOnByProduct(this);
-         coffeeTab.setViewportView(coffeeProductListPanel);
+        coffeeTab.setViewportView(coffeeProductListPanel);
         dessertTab.setViewportView(dessertProductListPanel);
         candyTab.setViewportView(candyProductListPanel);
 
@@ -163,6 +167,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         lblchange = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnEdited = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(231, 212, 187));
 
@@ -278,6 +283,15 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
             }
         });
 
+        btnEdited.setBackground(new java.awt.Color(255, 255, 204));
+        btnEdited.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
+        btnEdited.setText("Edited");
+        btnEdited.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -299,6 +313,8 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdited, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -311,7 +327,9 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDelete)
+                            .addComponent(btnEdited))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -357,21 +375,25 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         dessertTab.setVisible(false);
         candyTab.setVisible(false);
         switch (selectedIndex) {
-        case 0: // Coffee tab
-            coffeeTab.setVisible(true);
-            break;
-        case 1: // Dessert tab
-            dessertTab.setVisible(true);
-            break;
-        case 2: // Candy tab
-            candyTab.setVisible(true);
-            break;
-        default:
-            break;
-    }
+            case 0: // Coffee tab
+                coffeeTab.setVisible(true);
+                break;
+            case 1: // Dessert tab
+                dessertTab.setVisible(true);
+                break;
+            case 2: // Candy tab
+                candyTab.setVisible(true);
+                break;
+            default:
+                break;
+        }
         revalidate();
-    repaint();
+        repaint();
     }//GEN-LAST:event_categoryTabMousePressed
+
+    private void btnEditedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditedActionPerformed
+       
+    }//GEN-LAST:event_btnEditedActionPerformed
     public void clearReceipt() {
         receipt = new Reciept();
 
@@ -380,6 +402,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdited;
     private javax.swing.JScrollPane candyTab;
     private javax.swing.JTabbedPane categoryTab;
     private javax.swing.JScrollPane coffeeTab;
@@ -407,6 +430,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         Addcash(paymentDialog);
         lblchange.setText("" + (receipt.getCash() - receipt.getTotal()));
     }
+
 
     private void Addcash(CashDialog paymentDialog) {
         float cash = paymentDialog.resultNumber;

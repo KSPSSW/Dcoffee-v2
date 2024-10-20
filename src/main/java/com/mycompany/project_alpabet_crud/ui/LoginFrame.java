@@ -28,7 +28,14 @@ public class LoginFrame extends javax.swing.JFrame {
         setImage("backgroundLogin", 2000, 750, lblBackground);
         setImage("userlogo", 65, 65, lblUserLogo);
         setImage("passwordlogo", 65, 65, lblPasswordLogo);
-        
+        getRootPane().setDefaultButton(btnLogin);
+        edtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    btnLoginActionPerformed(null);
+                }
+            }
+        });
     }
 
     public static void setImage(String imageName, int widthImage, int heightImage, JLabel label) {
@@ -183,16 +190,16 @@ public class LoginFrame extends javax.swing.JFrame {
 
         UserService userService = new UserService();
         User user = userService.login(login, password);
-        
+
         if (user != null) {
             System.out.println(UserService.getCurrentUser().getName());
             this.dispose();
-            
+
             // เปิด MainFrame
             Mainframe mainFrame = new Mainframe(); // สร้างอ็อบเจกต์ของ MainFrame
             mainFrame.setVisible(true); // แสดง MainFrame
         } else {
-            
+
             edtLogin.setText("");
             edtPassword.setText("");
             JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE); // แสดงข้อความล็อกอินไม่สำเร็จ

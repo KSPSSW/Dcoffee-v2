@@ -25,6 +25,7 @@ public class RecieptDetail {
     private String productSize;
     private String productSweetLevel;
     private String productType;
+    private Product product;
 
     public String getProductSize() {
         return productSize;
@@ -99,6 +100,10 @@ public class RecieptDetail {
 
     public int getProductId() {
         return productId;
+    }
+    
+    public Product getProduct() {
+        return product;
     }
 
     public void setProductId(int productId) {

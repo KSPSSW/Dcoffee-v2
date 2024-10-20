@@ -66,6 +66,7 @@ private ArrayList<BuyProductable> subscribers = new ArrayList<>();
               
               
     }
+    
         public void addOnByProduct(BuyProductable subscriber) {
         subscribers.add(subscriber);
 
