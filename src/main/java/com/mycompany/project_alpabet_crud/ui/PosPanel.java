@@ -168,7 +168,6 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         lblchange = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnEdited = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(231, 212, 187));
 
@@ -284,15 +283,6 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
             }
         });
 
-        btnEdited.setBackground(new java.awt.Color(255, 255, 204));
-        btnEdited.setFont(new java.awt.Font("K2D", 0, 18)); // NOI18N
-        btnEdited.setText("Edited");
-        btnEdited.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditedActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -314,8 +304,6 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEdited, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -328,9 +316,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDelete)
-                            .addComponent(btnEdited))
+                        .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -391,10 +377,6 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         revalidate();
         repaint();
     }//GEN-LAST:event_categoryTabMousePressed
-
-    private void btnEditedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditedActionPerformed
-       
-    }//GEN-LAST:event_btnEditedActionPerformed
     public void clearReceipt() {
         receipt = new Reciept();
 
@@ -403,7 +385,6 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEdited;
     private javax.swing.JScrollPane candyTab;
     private javax.swing.JTabbedPane categoryTab;
     private javax.swing.JScrollPane coffeeTab;
