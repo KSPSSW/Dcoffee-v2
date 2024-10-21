@@ -31,6 +31,7 @@ public class StockPanel extends javax.swing.JPanel {
 //    private final MaterialService materialService;
     private List<Material> material;
     private Material editedMaterial;
+    
     private UserService userService = new UserService();
     private User user = userService.getCurrentUser();
     
@@ -273,17 +274,14 @@ public class StockPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void openDialog() {
-        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
-        StockDialog stockDialog = new StockDialog(frame, editedCheckStock);
-        JFrame newFrame = new JFrame("Stock");
-        newFrame.add(stockDialog);
-        newFrame.pack(); 
-        newFrame.setLocationRelativeTo(frame); 
-        newFrame.setVisible(true);
-        newFrame.addWindowListener(new WindowAdapter() {
+       JFrame frame = (JFrame) SwingUtilities.getRoot(this);
+       StockDialog stockDialog = new StockDialog(frame, editedCheckStock);
+        stockDialog.setLocationRelativeTo(this);
+        stockDialog.setVisible(true);
+        stockDialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                refreshTable(); 
+                refreshTable();
             }
         });
     }
