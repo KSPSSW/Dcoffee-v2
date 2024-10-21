@@ -20,20 +20,24 @@ public class Stock {
     private int total;
     private int amount;
     private Date date;
+    private int userId;
+    private User user;
 
-    public Stock(int id, String matName, int total, int amount, Date date) {
+    public Stock(int id, String matName, int total, int amount, Date date, int userId) {
         this.id = id;
         this.matName = matName;
         this.total = total;
         this.amount = amount;
         this.date = date;
+        this.userId = userId;
     }
 
-    public Stock(String matName, int total, int amount, Date date) {
+    public Stock(String matName, int total, int amount, Date date, int userId) {
         this.matName = matName;
         this.total = total;
         this.amount = amount;
         this.date = date;
+        this.userId = userId;
     }
 
     public Stock() {
@@ -42,6 +46,7 @@ public class Stock {
         this.total = 0;
         this.amount = 0;
         this.date = null;
+        this.userId = -1;
     }
 
     public int getId() {
@@ -83,11 +88,31 @@ public class Stock {
     public void setDate(Date date) {
         this.date = date;
     }
+    
+    public int getuserId(){
+        return userId;
+    }
+
+    public void setuserId(int userInt){
+        this.userId = userId;
+    }
+    
+    public User getUser(){
+        return user;
+    }
+    
+    public void setUser(User user){
+        this.user = user;
+        this.userId = user.getId();
+    }
 
     @Override
     public String toString() {
-        return "Stock{" + "id=" + id + ", matName=" + matName + ", total=" + total + ", amount=" + amount + ", date=" + date + '}';
+        return "Stock{" + "id=" + id + ", matName=" + matName + ", total=" + total + ", amount=" + amount + ", date=" + date + ", userId=" + userId + ", user=" + user + '}';
     }
+
+    
+    
     
      public static Stock fromRS(ResultSet rs) {
         Stock stock = new Stock();
@@ -97,6 +122,7 @@ public class Stock {
             stock.setTotal(rs.getInt("stock_total"));
             stock.setAmount(rs.getInt("stock_amount"));
             stock.setDate(rs.getTimestamp("stock_date"));
+            stock.setuserId(rs.getInt("user_id"));
         } catch (SQLException ex) {
             Logger.getLogger(Stock.class.getName()).log(Level.SEVERE, null, ex);
             return null;

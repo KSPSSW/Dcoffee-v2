@@ -4,6 +4,9 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
+import com.mycompany.project_alpabet_crud.model.Material;
+import javax.swing.JFrame;
+
 /**
  *
  * @author kissa
@@ -13,7 +16,7 @@ public class StockDialog extends javax.swing.JPanel {
     /**
      * Creates new form StockDialog
      */
-    public StockDialog() {
+    public StockDialog(JFrame frame, Material editedMaterial) {
         initComponents();
     }
 

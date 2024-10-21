@@ -151,7 +151,6 @@ public class Mainframe extends javax.swing.JFrame {
         lblUserName = new javax.swing.JLabel();
         lblRole = new javax.swing.JLabel();
         scrPanel = new javax.swing.JScrollPane();
-        jRadioButton1 = new javax.swing.JRadioButton();
         lblHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -541,9 +540,6 @@ public class Mainframe extends javax.swing.JFrame {
         scrPanel.setBackground(new java.awt.Color(255, 255, 255));
         scrPanel.setPreferredSize(new java.awt.Dimension(1055, 600));
 
-        jRadioButton1.setText("jRadioButton1");
-        scrPanel.setViewportView(jRadioButton1);
-
         lblHeader.setFont(new java.awt.Font("K2D", 3, 45)); // NOI18N
         lblHeader.setForeground(new java.awt.Color(200, 162, 127));
         lblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -712,7 +708,6 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblCustomer;
     private javax.swing.JLabel lblHeader;

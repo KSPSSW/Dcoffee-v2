@@ -4,13 +4,26 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
+import com.mycompany.project_alpabet_crud.model.Material;
+import com.mycompany.project_alpabet_crud.model.Stock;
+import com.mycompany.project_alpabet_crud.model.User;
+import com.mycompany.project_alpabet_crud.service.MaterialService;
+import com.mycompany.project_alpabet_crud.service.StockService;
+import com.mycompany.project_alpabet_crud.service.UserService;
+import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.table.AbstractTableModel;
+
 
 /**
  *
  * @author kissa
  */
 public class StockPanel extends javax.swing.JPanel {
-  
     /**
      * Creates new form StockPanel
      */
@@ -30,13 +43,13 @@ public class StockPanel extends javax.swing.JPanel {
         CheckStockPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblUser = new javax.swing.JTable();
         btnView = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        scrollpane = new javax.swing.JScrollPane();
+        tblMaterial = new javax.swing.JTable();
         btnCheckStock = new javax.swing.JButton();
         Material = new javax.swing.JLabel();
 
@@ -47,7 +60,7 @@ public class StockPanel extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(231, 212, 187));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -58,10 +71,15 @@ public class StockPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblUser);
 
         btnView.setBackground(new java.awt.Color(102, 204, 255));
         btnView.setText("View");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(255, 102, 102));
         btnDelete.setText("Delete");
@@ -80,7 +98,7 @@ public class StockPanel extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnView)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete))
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -101,21 +119,23 @@ public class StockPanel extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(231, 212, 187));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblMaterial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        scrollpane.setViewportView(tblMaterial);
 
         btnCheckStock.setBackground(new java.awt.Color(102, 204, 255));
         btnCheckStock.setText("CheckStock");
+        btnCheckStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckStockActionPerformed(evt);
+            }
+        });
 
         Material.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Material.setForeground(new java.awt.Color(102, 102, 102));
@@ -125,7 +145,7 @@ public class StockPanel extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(scrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Material)
@@ -141,7 +161,7 @@ public class StockPanel extends javax.swing.JPanel {
                     .addComponent(btnCheckStock)
                     .addComponent(Material))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2))
+                .addComponent(scrollpane))
         );
 
         javax.swing.GroupLayout CheckStockPanelLayout = new javax.swing.GroupLayout(CheckStockPanel);
@@ -164,20 +184,27 @@ public class StockPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(CheckStockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(CheckStockPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(CheckStockPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(CheckStockPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewActionPerformed
 
+    private void btnCheckStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCheckStockActionPerformed
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CheckStockPanel;
     private javax.swing.JLabel Material;
@@ -188,8 +215,14 @@ public class StockPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane scrollpane;
+    private javax.swing.JTable tblMaterial;
+    private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
+
+  
+
+    
+    
+
 }

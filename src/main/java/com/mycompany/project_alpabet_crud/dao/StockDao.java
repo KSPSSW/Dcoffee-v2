@@ -6,6 +6,7 @@ package com.mycompany.project_alpabet_crud.dao;
 
 import com.mycompany.project_alpabet_crud.helper.DatabaseHelper;
 import com.mycompany.project_alpabet_crud.model.Stock;
+import com.mycompany.project_alpabet_crud.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,6 +39,25 @@ public class StockDao implements Dao<Stock>{
             System.out.println(ex.getMessage());
         }
         return stock;
+    }
+    
+    public User getUser(String name){
+        User user = null;
+        String sql = "SELECT * FROM user WHERE user_login=?";
+        Connection conn = DatabaseHelper.getConnect();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                user = User.fromRS(rs);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return user;
     }
 
     public Stock getByName(String name) {
