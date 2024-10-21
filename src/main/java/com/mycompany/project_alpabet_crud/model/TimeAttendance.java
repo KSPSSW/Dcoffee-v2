@@ -25,7 +25,6 @@ public class TimeAttendance {
     private String type;
     private Date totalhours;
     private Date date;
-    private String status;
     private int userId;
     private int workinghours;
     
@@ -57,14 +56,12 @@ public class TimeAttendance {
 
     }
 
-    public TimeAttendance(int id, Date checkin, Date checkout, String type, Date totalhours, Date date, String status, int userId) {
+    public TimeAttendance(int id, Date checkin, Date checkout, Date totalhours, Date date, int userId) {
         this.id = id;
         this.checkin = checkin;
         this.checkout = checkout;
-        this.type = type;
         this.totalhours = totalhours;
         this.date = date;
-        this.status = status;
         this.userId = userId;
         calculateWorkingHours();
         this.checkinTime = (checkin != null) ? sdf.format(checkin) : "Null";
@@ -72,14 +69,12 @@ public class TimeAttendance {
 
     }
 
-    public TimeAttendance(Date checkin, Date checkout, String type, Date totalhours, Date date, String status, int userId) {
+    public TimeAttendance(Date checkin, Date checkout, Date totalhours, Date date, int userId) {
         this.id = -1;
         this.checkin = checkin;
         this.checkout = checkout;
-        this.type = type;
         this.totalhours = totalhours;
         this.date = date;
-        this.status = status;
         this.userId = userId;
         calculateWorkingHours();
         this.checkinTime = (checkin != null) ? sdf.format(checkin) : "Null";
@@ -87,14 +82,12 @@ public class TimeAttendance {
 
     }
 
-    public TimeAttendance(String type, int userId, int spId) {
+    public TimeAttendance(String type, int userId) {
         this.id = -1;
         this.checkin = checkin;
         this.checkout = checkin;
-        this.type = type;
         this.totalhours = totalhours;
         this.date = date;
-        this.status = status;
         this.userId = userId;
         this.workinghours = workinghours;
         this.checkinTime = (checkin != null) ? sdf.format(checkin) : "Null";
@@ -106,10 +99,8 @@ public class TimeAttendance {
         this.id = -1;
         this.checkin = null;
         this.checkout = null;
-        this.type = "";
         this.totalhours = null;
         this.date = null;
-        this.status = "";
         this.userId = 0;
         this.workinghours = 0;
         this.checkinTime = (checkin != null) ? sdf.format(checkin) : "Null";
@@ -158,14 +149,6 @@ public class TimeAttendance {
         this.checkout = checkout;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getTotalhours() {
         return (totalhours != null) ? sdf.format(totalhours) : "";
     }
@@ -176,14 +159,6 @@ public class TimeAttendance {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public int getUserId() {
@@ -222,7 +197,7 @@ public class TimeAttendance {
         String checkoutTime = (checkout != null) ? sdf.format(checkout) : "Null";
         String totalhoursTime = (totalhours != null) ? sdf.format(totalhours) : "Null";
 
-        return "TimeAttendance{" + "id=" + id + ", checkin=" + checkinTime + ", checkout=" + checkoutTime + ", type=" + type + ", totalhours=" + totalhoursTime + ", Working hours=" + workinghours + ", date=" + date + ", status=" + status + ", userId=" + userId + ", name=" + name + ", role=" + role + '}';
+        return "TimeAttendance{" + "id=" + id + ", checkin=" + checkinTime + ", checkout=" + checkoutTime + ", totalhours=" + totalhoursTime + ", Working hours=" + workinghours + ", date=" + date + ", userId=" + userId + ", name=" + name + ", role=" + role + '}';
     }
 
     public static TimeAttendance fromRS(ResultSet rs) {
@@ -257,7 +232,6 @@ public class TimeAttendance {
                 }
 
                 timeAttendance.setId(rs.getInt("ta_id"));
-                timeAttendance.setType(rs.getString("ta_type"));
                 String dateStr = rs.getString("ta_date");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 if (dateStr != null) {
@@ -272,8 +246,6 @@ public class TimeAttendance {
                 }
 
                 timeAttendance.setId(rs.getInt("ta_id"));
-                timeAttendance.setType(rs.getString("ta_type"));
-                timeAttendance.setStatus(rs.getString("ta_status"));
                 timeAttendance.setUserId(rs.getInt("user_id"));
 
 
