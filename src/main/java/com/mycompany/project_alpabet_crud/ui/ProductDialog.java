@@ -330,22 +330,22 @@ public class ProductDialog extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    private void setFormToObject() {
+     private void setFormToObject() {
         editedProduct.setName(edtName.getText());
         editedProduct.setPrice(Float.parseFloat(edtPrice.getText().toString())); //แปลง String เป็น Float
         editedProduct.setSize(edtSize.getText());
         editedProduct.setSweetLevel(edtSweetLevel.getText());
         editedProduct.setType(edtType.getText());
-        editedProduct.setCategoryId(cmbCategoryId.getSelectedIndex());
+        editedProduct.setCategoryId(Integer.parseInt((String) cmbCategoryId.getSelectedItem()));
     }
 
-    private void setObjectToForm() {
+     private void setObjectToForm() {
         edtName.setText(editedProduct.getName());
         edtPrice.setText(String.valueOf(editedProduct.getPrice())); //แปลง Float เป็น String
         edtSize.setText(editedProduct.getSize());
         edtType.setText(editedProduct.getSweetLevel());
         edtType.setText(editedProduct.getType());
-        cmbCategoryId.setSelectedIndex(editedProduct.getCategoryId());
+        cmbCategoryId.setSelectedItem(String.valueOf(editedProduct.getCategoryId()));
     }
 
 

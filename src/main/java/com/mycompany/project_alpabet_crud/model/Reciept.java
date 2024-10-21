@@ -181,6 +181,7 @@ public class Reciept {
     recieptDetails.remove(recieptDetail);
     calculateTotal();
     }
+        
     
     public void calculateTotal(){
     int totalQty = 0;

@@ -21,6 +21,13 @@ public class ProductService {
         return (ArrayList<Product>) prodcutDao.getAll("product_name ASC");
 
     }
+    
+     public ArrayList<Product> getProductsCategoryOrderByName(int categoryId) {
+        ProductDao prodcutDao = new ProductDao();
+        return (ArrayList<Product>) prodcutDao.getAll("category_id ="+categoryId," product_name ASC");
+
+    }
+  
 
     public List<Product> getByName(String name) {
         ProductDao prodcutDao = new ProductDao();

@@ -39,7 +39,7 @@ public class ProductDao implements Dao<Product> {
         }
         return product;
     }
-    
+
     public List<Product> getAll() {
         ArrayList<Product> list = new ArrayList();
         String sql = "SELECT * FROM product";
@@ -59,7 +59,7 @@ public class ProductDao implements Dao<Product> {
         }
         return list;
     }
-    
+
     @Override
     public List<Product> getAll(String where, String order) {
         ArrayList<Product> list = new ArrayList();
@@ -80,7 +80,6 @@ public class ProductDao implements Dao<Product> {
         }
         return list;
     }
-    
 
     public List<Product> getAll(String order) {
         ArrayList<Product> list = new ArrayList();
@@ -100,6 +99,35 @@ public class ProductDao implements Dao<Product> {
             System.out.println(ex.getMessage());
         }
         return list;
+    }
+
+    public List<Product> getProductsByCategory(int categoryId) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM product WHERE category_id = ?";
+        Connection conn = DatabaseHelper.getConnect();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Product product = Product.fromRS(rs);
+                products.add(product);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close(); // ปิดการเชื่อมต่อเมื่อเสร็จสิ้น
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+        return products;
     }
 
     @Override
@@ -164,7 +192,7 @@ public class ProductDao implements Dao<Product> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return -1;        
+        return -1;
     }
 
 }
