@@ -36,23 +36,26 @@ public class Material {
     private int totalprice;
     private int priceperunit;
     private String matshopimport;
+    private int amount;
 
-    public Material(int id, String name, int qty, int totalprice, int priceperunit, String matshopimport) {
+    public Material(int id, String name, int qty, int totalprice, int priceperunit, String matshopimport, int amount) {
         this.id = id;
         this.name = name;
         this.qty = qty;
         this.totalprice = totalprice;
         this.priceperunit = priceperunit;
         this.matshopimport = matshopimport;
+        this.amount = amount;
     }
 
-    public Material(String name, int qty, int totalprice ,int priceperunit, String matshopimport) {
+    public Material(String name, int qty, int totalprice ,int priceperunit, String matshopimport, int amount) {
         this.id = -1;
         this.name = name;
         this.qty = qty;
         this.totalprice = totalprice;
         this.priceperunit=priceperunit;
         this.matshopimport=matshopimport;
+        this.amount = amount;
     }
 
     public Material() {
@@ -62,6 +65,7 @@ public class Material {
         this.totalprice = 0;
         this.priceperunit=0;
         this.matshopimport="";
+        this.amount = 0;
     }
 
     public int getId() {
@@ -110,11 +114,19 @@ public class Material {
     public void setShop(String matshopimport) {
         this.matshopimport = matshopimport;
     }
+    public int getAmount(){
+        return amount;
+    }
+    public void setAmount(int amount){
+        this.amount = amount;
+    }
 
     @Override
     public String toString() {
-        return "Material{" + "id=" + id + ", name=" + name + ", qty=" + qty + ", totalprice=" + totalprice + ", priceperunit=" + priceperunit + ", matshopimport=" + matshopimport + '}';
+        return "Material{" + "id=" + id + ", name=" + name + ", qty=" + qty + ", totalprice=" + totalprice + ", priceperunit=" + priceperunit + ", matshopimport=" + matshopimport + ", amount=" + amount + '}';
     }
+
+    
     
 }
 
