@@ -4,19 +4,20 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
+import com.mycompany.project_alpabet_crud.model.CheckStock;
 import com.mycompany.project_alpabet_crud.model.Material;
-import com.mycompany.project_alpabet_crud.model.Stock;
 import com.mycompany.project_alpabet_crud.model.User;
+import com.mycompany.project_alpabet_crud.service.CheckStockService;
 import com.mycompany.project_alpabet_crud.service.MaterialService;
-import com.mycompany.project_alpabet_crud.service.StockService;
 import com.mycompany.project_alpabet_crud.service.UserService;
-import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
+
 
 
 /**
@@ -24,11 +25,59 @@ import javax.swing.table.AbstractTableModel;
  * @author kissa
  */
 public class StockPanel extends javax.swing.JPanel {
+    private final CheckStockService checkStockService;
+    private List<CheckStock> list;
+    private CheckStock editedCheckStock;
+//    private final MaterialService materialService;
+    private List<Material> material;
+    private Material editedMaterial;
+    private UserService userService = new UserService();
+    private User user = userService.getCurrentUser();
+    
+    
     /**
      * Creates new form StockPanel
      */
     public StockPanel() {
         initComponents();
+        CheckStock checkStock = new CheckStock();
+        checkStockService = new CheckStockService();
+        list = checkStockService.getCheckStocks();
+        tblUser.setModel(new AbstractTableModel(){
+            @Override
+            public int getRowCount() {
+                return list.size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                return 3;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                CheckStock checkStock = (CheckStock) list.get(rowIndex);
+                switch (columnIndex) {
+                    case 0:
+                        return checkStock.getCheckId();
+                    case 1:
+                        return checkStock.getCheckDate();
+                    case 2:
+                        return checkStock.getUser().getName();
+                    default:
+                        return "Unknown";
+                }
+            } 
+            
+            String[] columnNames = {"Id", "Date", "User Name"};
+            
+            @Override 
+            public String getColumnName(int column){
+                return columnNames[column];
+            }
+        });
+        
+        
     }
 
     /**
@@ -198,11 +247,14 @@ public class StockPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
+      
+        
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnCheckStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStockActionPerformed
         // TODO add your handling code here:
+        editedCheckStock = new CheckStock(user);
+        openDialog();
     }//GEN-LAST:event_btnCheckStockActionPerformed
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,7 +272,25 @@ public class StockPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
 
-  
+    private void openDialog() {
+        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
+        StockDialog stockDialog = new StockDialog(frame, editedCheckStock);
+        JFrame newFrame = new JFrame("Stock");
+        newFrame.add(stockDialog);
+        newFrame.pack(); 
+        newFrame.setLocationRelativeTo(frame); 
+        newFrame.setVisible(true);
+        newFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshTable(); 
+            }
+        });
+    }
+
+    private void refreshTable(){
+        
+    }
 
     
     

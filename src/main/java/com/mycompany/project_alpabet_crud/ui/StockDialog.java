@@ -4,7 +4,10 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
+import com.mycompany.project_alpabet_crud.model.CheckStock;
 import com.mycompany.project_alpabet_crud.model.Material;
+import java.awt.AWTEventMulticaster;
+import java.awt.event.WindowAdapter;
 import javax.swing.JFrame;
 
 /**
@@ -18,6 +21,14 @@ public class StockDialog extends javax.swing.JPanel {
      */
     public StockDialog(JFrame frame, Material editedMaterial) {
         initComponents();
+    }
+
+    StockDialog(JFrame frame) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    StockDialog(JFrame frame, CheckStock editedCheckStock) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -197,4 +208,5 @@ public class StockDialog extends javax.swing.JPanel {
     private javax.swing.JTextField txtMatName;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
 }

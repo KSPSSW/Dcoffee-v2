@@ -4,10 +4,12 @@
  */
 package com.mycompany.project_alpabet_crud.ui;
 
+import com.mycompany.project_alpabet_crud.model.CheckStock;
 import com.mycompany.project_alpabet_crud.model.Product;
 import com.mycompany.project_alpabet_crud.model.User;
 import com.mycompany.project_alpabet_crud.service.ProductService;
 import com.mycompany.project_alpabet_crud.service.UserService;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -32,7 +34,7 @@ public class ProductDialog extends javax.swing.JDialog {
     /**
      * Creates new form ProductDialog
      */
-    public ProductDialog(java.awt.Frame parent, Product editedProduct) {
+    public ProductDialog(Frame parent, Product editedProduct) {
         super(parent, true);
         initComponents();
         this.editedProduct = editedProduct;
