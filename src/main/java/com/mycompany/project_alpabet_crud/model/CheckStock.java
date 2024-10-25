@@ -99,7 +99,21 @@ public class CheckStock {
     public void setCheckStockDetails(ArrayList<CheckStockDetail> checkStockDetails) {
         this.checkStockDetails = checkStockDetails;
     }
-
+    
+    public void addCheckStockDetail(CheckStockDetail checkStockDetail) {
+        checkStockDetails.add(checkStockDetail);
+    }
+    
+     public void addCheckStockDetail(Material Material, int qty, int unitPrice, int amount) {
+        CheckStockDetail cd = new CheckStockDetail(Material.getName(),qty, unitPrice, qty - amount,-1, Material.getId());
+        checkStockDetails.add(cd);
+    }
+     
+    public void addCheckStockDetail(Material material, int qty) {
+        CheckStockDetail cd = new CheckStockDetail();
+        checkStockDetails.add(cd);
+    }
+        
     @Override
     public String toString() {
         return "CheckStock{" + "checkId=" + checkId + ", checkDate=" + checkDate + ", checkStatus=" + checkStatus + ", userId=" + userId + ", user=" + user + ", checkStockDetails=" + checkStockDetails + '}';
@@ -126,6 +140,8 @@ public class CheckStock {
         }
         return checkStock;
     }
+
+    
     
     
 }

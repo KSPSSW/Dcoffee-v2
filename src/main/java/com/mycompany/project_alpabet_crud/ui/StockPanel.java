@@ -5,6 +5,7 @@
 package com.mycompany.project_alpabet_crud.ui;
 
 import com.mycompany.project_alpabet_crud.model.CheckStock;
+import com.mycompany.project_alpabet_crud.model.CheckStockDetail;
 import com.mycompany.project_alpabet_crud.model.Material;
 import com.mycompany.project_alpabet_crud.model.User;
 import com.mycompany.project_alpabet_crud.service.CheckStockService;
@@ -17,6 +18,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -28,9 +30,12 @@ public class StockPanel extends javax.swing.JPanel {
     private final CheckStockService checkStockService;
     private List<CheckStock> list;
     private CheckStock editedCheckStock;
+    private ArrayList checkStocks;
+    private ArrayList<CheckStockDetail> checkStockDetails;
 //    private final MaterialService materialService;
-    private List<Material> material;
+    private List<Material> materials;
     private Material editedMaterial;
+    private Material material;
     
     private UserService userService = new UserService();
     private User user = userService.getCurrentUser();
@@ -248,7 +253,61 @@ public class StockPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-      
+      int selectedIndex = tblUser.getSelectedRow();
+        System.out.println(selectedIndex);
+        if (selectedIndex < 0) {
+            return;
+        }
+
+        try {
+            editedCheckStock = (CheckStock) checkStocks.get(selectedIndex);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            resetMatTable();
+            return;
+        }
+
+        int checkId = editedCheckStock.getCheckId();
+        editedCheckStock = checkStockService.getById(checkId);
+        checkStockDetails = editedCheckStock.getCheckStockDetails();
+
+        if (selectedIndex >= 0) {
+            tblMaterial.setModel(new AbstractTableModel() {
+                @Override
+                public int getRowCount() {
+                    return checkStockDetails.size();
+                }
+
+                @Override
+                public int getColumnCount() {
+                    return 7;
+                }
+
+                @Override
+                public Object getValueAt(int rowIndex, int columnIndex) {
+                    CheckStockDetail checkStockDetail = checkStockDetails.get(rowIndex);
+                    switch (columnIndex) {
+                        case 0:
+                            return checkStockDetail.getName();
+                        case 1:
+                            return checkStockDetail.getQty();
+                        case 2:
+                            return checkStockDetail.getUnitPrice();                    
+                        default:
+                            return "";
+                    }
+                }
+
+                String[] colNames = {"Name", "Quantity", "NODM", "NOEXP", "Price", "DamageValue", "ExpiryValue"};
+
+                @Override
+                public String getColumnName(int column) {
+                    return colNames[column];
+                }
+
+            });
+        }
+        refreshTable();
         
     }//GEN-LAST:event_btnViewActionPerformed
 
@@ -275,7 +334,7 @@ public class StockPanel extends javax.swing.JPanel {
 
     private void openDialog() {
        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
-       StockDialog stockDialog = new StockDialog(frame, editedCheckStock);
+       StockDialog stockDialog = new StockDialog(frame, editedCheckStock, material);
         stockDialog.setLocationRelativeTo(this);
         stockDialog.setVisible(true);
         stockDialog.addWindowListener(new WindowAdapter() {
@@ -288,6 +347,10 @@ public class StockPanel extends javax.swing.JPanel {
 
     private void refreshTable(){
         
+    }
+
+    private void resetMatTable() {
+       tblUser.setModel(new DefaultTableModel());
     }
 
     

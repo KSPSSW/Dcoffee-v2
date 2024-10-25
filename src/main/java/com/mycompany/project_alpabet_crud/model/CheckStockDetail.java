@@ -52,6 +52,8 @@ public class CheckStockDetail {
         this.materialId = 0;
     }
 
+    
+
     public int getCsdId() {
         return csdId;
     }

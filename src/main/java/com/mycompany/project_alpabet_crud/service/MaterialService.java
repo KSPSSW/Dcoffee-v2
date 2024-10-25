@@ -17,6 +17,14 @@ public class MaterialService {
         MaterialDao materialDao = new MaterialDao();
         return materialDao.getAll(" material_id asc");
     }
+     
+     public Material getById(int id) {
+         Material material;
+         MaterialDao materialDao = new MaterialDao();
+         material = materialDao.get(id);
+         
+         return material;
+     }
     
     public Material getUserImport(String name){
         MaterialDao materialDao = new MaterialDao();
